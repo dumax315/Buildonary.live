@@ -3,17 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <title>Buildonary.Live</title>
+    <link href="../../homestyle.css" rel="stylesheet" type="text/css" />
+		<link rel="icon" href="../../cubes.ico" type="image/icon type">
   </head>
   <body>
-		<form id="info">
-			<label for="uname">Username:</label><br>
-			<input type="text" id="uname" name="uname"><br>
-		
-			<button id="addCode" onclick="joinRoom()">Join room </button>
+		<div id="formContainer" style="margin-top:60px;">
+			<form id="info">
+				<label for="uname">Username:</label>
+				<input type="text" id="uname" name="uname"><br>
 			
-		</form>
+				<button id="addCode" onclick="joinRoom()">Join room </button>
+				
+			</form>
+		</div>
     <script>
 			var pathname = window.location.pathname.split("/")[2];
 			var button = document.getElementById("addCode");
@@ -25,7 +28,12 @@
 			function joinRoom(){
 				const form = document.querySelector('form');
 				const data = Object.fromEntries(new FormData(form).entries());
-				location.href = "/room/"+pathname+"?username="+data.uname;
+				if(data.uname == ""){
+					location.href = "/room/"+pathname;
+				}else{
+					location.href = "/room/"+pathname+"?username="+data.uname;
+				}
+				
 			}
 		</script>
   </body>

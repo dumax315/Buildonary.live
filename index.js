@@ -92,6 +92,7 @@ function startRound(myroom,mySocketId){
 	roomData[locat]["word"] = wordToGuess;
 	io.to(myroom).emit('New Round', roomData[locat]);
 	io.to(myroom).emit('game Update', roomData[locat], mySocketId);
+	io.to(myroom).emit('update Users', roomData[locat]);
 }
 
 io.on('connection', (socket) => {
@@ -156,6 +157,7 @@ io.on('connection', (socket) => {
 
 	socket.on('enter room', (msg) => {
     console.log(msg);
+		msg = msg.toLowerCase()
 		socket.join(msg);
 		var locat;
 		if(!openRooms.includes(msg)){

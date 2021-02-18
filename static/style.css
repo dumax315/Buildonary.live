@@ -74,18 +74,36 @@ body {
 }
 
 #players {
+	text-align: center;
 	border: 5px solid red;
 	width: calc(15% - 20px);
 	margin: 0px;
 	padding: 0px;
 	list-style-type: none;
-	height: 80%;
+	height: 60%;
+	border-width: 5px 0px 5px 5px;
+	/*max-width: 130px;*/
+}
+
+.username {
+	padding-top: 5px;
+	font-size:18px;
+}
+.userscore{
+	padding-right: 1em;
+  padding-bottom: 5px;
+	border-bottom: 5px solid red;
+	text-align: right;
+}
+.playerLocater {
+	float: left;
+	width:45px;
 }
 
 #controls {
 	position: relative;
 	border: 5px solid red;
-	border-width: 5px 0px 5px 0px;
+	border-width: 5px 0px 5px 5px;
 	width: 55%;
 	height: 80%;
 }
@@ -121,7 +139,7 @@ body {
 }
 #Gui{
 	position: absolute;
-	width:100%;
+	/*width:100%;*/
 }
 #GuiTime {
 	position: absolute;
@@ -143,6 +161,52 @@ body {
 #nextRound {
 	display: none;
 }
+#endBox {
+	width:40%;
+}
+#endRoundScores {
+	text-align: center;
+	border: 5px solid red;
+	
+	border-bottom-width: 0;
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	height: 60%;
+}
+
+#nextRound{
+	width: 100%;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border-radius: 4px;
+  cursor: pointer;
+	font-family:'agent-orange.regular';
+	font-weight:normal;
+	font-size:18px;
+	text-align: center;
+	border: 2px solid #4CAF50;
+}
+#nextRound {
+  transition-duration: 0.4s;
+}
+
+#nextRound:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
 
 .custom-radios {
 	display: flex;

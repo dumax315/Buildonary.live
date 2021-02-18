@@ -3,20 +3,28 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
+    <title>Buildonary.Live</title>
     <link href="homestyle.css" rel="stylesheet" type="text/css" />
+		<link rel="icon" href="cubes.ico" type="image/icon type">
   </head>
   <body>
-		<form id="info">
-			<label for="uname">Username:</label><br>
-			<input type="text" id="uname" name="uname"><br>
-		
-			<button onclick="newRoom()">Create a new privet room</button><br>
-			<button onclick="joinRoom()">Join existing privet room</button>
-		
-			<label for="rcode">Room Code:</label>
-			<input type="text" id="rcode" name="rcode">
-		</form>
+		<div id="about">
+			
+			<div>Welcome to<br>Buildonary.live</div>
+		</div>
+		<div id="formContainer">
+			<form id="info">
+				<label for="uname">Username:</label>
+				<input type="text" id="uname" name="uname"><br>
+			
+				<button onclick="newRoom()">Create a new private room</button><br>
+				<button onclick="joinRoom()">Join existing private room</button><br>
+			
+				<label for="rcode">Room Code:</label>
+				<input type="text" id="rcode" name="rcode">
+			</form>
+		</div>
+		<div id="small">some icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     <script>
 			document.getElementById("info").onsubmit = function () {
 				return false;

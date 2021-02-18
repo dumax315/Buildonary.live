@@ -63,8 +63,15 @@ socket.on('update Users', function(msg,admin) {
 		score.textContent = msg.playerScores[i];
 		item.classList.add("username");
 		score.classList.add("userscore");
+		if(msg.playerIds[i] == msg["currentPlayer"]){
+			var image = document.createElement("img");
+			image.src = "../../cubes.svg"
+			image.classList.add("playerLocater");
+			item.appendChild(image);
+		}
 		players.appendChild(item);
 		players.appendChild(score);
+		
 	}
 	console.log(socket.id)
 	if(socket.id == msg.playerIds[0]){
