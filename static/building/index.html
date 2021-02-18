@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Three.js app</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!-- Including the three.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.min.js"></script>
+
+		<div class="flex-container">
+			
+			<div id="renderContainer">
+				<div id="info">
+				
+					<strong>left click</strong>: add voxel, <strong>shift + left click</strong>: remove voxel<br>
+					<strong>Right click</strong>: Orbit the Camera, <strong>shift + right click</strong>: Pan the Camera<br>
+					<strong>Scroll Wheel</strong>: Zoom In/Out
+				</div>
+
+				<!-- canvas will go here -->
+			</div>
+
+		</div>
+    <script src="script.js" type="module"></script>
+  </body>
+</html>

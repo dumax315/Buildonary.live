@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <link href="../../style.css" rel="stylesheet" type="text/css" />
+
+  </head>
+  <body>
+		<div id="roomInfo">
+
+		</div>
+		
+		<div class="flexBox">
+			<ul id="players">
+				
+			</ul>
+			<div id="controls">
+				<div id="roundOver">
+					<div id="endBox">
+						<ul id="endRoundScores"></ul>
+						<button id="nextRound">Next Round</button>
+					</div>
+				</div>
+				<div id="info">
+					<div id="wordToGuess"><br>
+					</div>
+					<strong>left click</strong>: add voxel, <strong>shift + left click</strong>: remove voxel<br>
+					<strong>Right click</strong>: Orbit the Camera, <strong>shift + right click</strong>: Pan the Camera<br>
+					<strong>Scroll Wheel</strong>: Zoom In/Out
+					<div id="GuiTime">
+					</div>
+					<div id="Gui">
+
+					</div>
+				</div>
+
+				<!-- canvas will go here -->
+				<div id="canvasContainer">
+				</div>
+				<div class="custom-radios">
+					<div>
+						<input type="radio" id="color-1" name="color" value="color-1" checked>
+						<label for="color-1">
+							<span>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+							</span>
+						</label>
+					</div>
+					
+					<div>
+						<input type="radio" id="color-2" name="color" value="color-2">
+						<label for="color-2">
+							<span>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+							</span>
+						</label>
+					</div>
+					
+					<div>
+						<input type="radio" id="color-3" name="color" value="color-3">
+						<label for="color-3">
+							<span>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+							</span>
+						</label>
+					</div>
+
+					<div>
+						<input type="radio" id="color-4" name="color" value="color-4">
+						<label for="color-4">
+							<span>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+							</span>
+						</label>
+					</div>
+					<div>
+						<input type="radio" id="color-5" name="color" value="color-5">
+						<label for="color-5">
+							<span>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+							</span>
+						</label>
+					</div>
+					<!-- code to coby to add colors-->
+					<div>
+						<input type="radio" id="color-6" name="color" value="color-6">
+						<label for="color-6">
+							<span>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+							</span>
+						</label>
+					</div>
+
+
+					<div>
+						<input type="radio" id="color-7" name="color" value="color-7">
+						<label for="color-7">
+							<span>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+							</span>
+						</label>
+					</div>
+
+					<div>
+						<input type="radio" id="color-8" name="color" value="color-8">
+						<label for="color-8">
+							<span>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+							</span>
+						</label>
+					</div>
+
+					<div>
+						<input type="radio" id="color-9" name="color" value="color-9">
+						<label for="color-9">
+							<span>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+							</span>
+						</label>
+					</div>
+
+					<div>
+						<input type="radio" id="color-10" name="color" value="color-10">
+						<label for="color-10">
+							<span>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+							</span>
+						</label>
+					</div>
+
+					<div>
+						<input type="radio" id="color-11" name="color" value="color-11">
+						<label for="color-11">
+							<span>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+							</span>
+						</label>
+					</div>
+
+					<div>
+						<input type="radio" id="color-12" name="color" value="color-12">
+						<label for="color-12">
+							<span>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+							</span>
+						</label>
+					</div>
+				</div>
+				<div id="adminControls">
+					<button id="newGame">Start Game/Force Skip Player</button>
+				</div>
+			</div>	
+			<div id="chatContainer">
+				<div id="messagesContainer">
+					<ul id="messages"></ul>
+				</div>
+				<form id="form" action="">
+					<input id="input" autocomplete="off" /><button>Send</button>
+				</form>
+			</div>
+		</div>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="https://Buildio.theohalpern.repl.co/game.js" type="module"></script>
+		
+  </body>
+</html>
