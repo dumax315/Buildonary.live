@@ -111,7 +111,7 @@ function startRound(myroom,mySocketId,rounds = 1){
 		roomData[locat]["playerSolved"][playerPlace] = true;
 		//game timer code in millisecends twice
 		roomData[locat]["time"] = new Date().getTime()+75000;
-		roomIntervals[locat]["timeOut"] = setTimeout(endRound, 75000,myroom,locat,socket.id);
+		roomIntervals[locat]["timeOut"] = setTimeout(endRound, 75000,myroom,locat,mySocketId);
 		console.log(roomData[locat]["time"]);
 		roomData[locat]["board"] = [];
 		roomData[locat]["word"] = wordToGuess;
