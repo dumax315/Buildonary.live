@@ -155,6 +155,18 @@ socket.on('round Over', function(msg) {
 });
 
 socket.on('end Game', function(msg) {
+	var roundsCounter = document.getElementById("GuiRounds");
+	roundsCounter.innerHTML = "Round Over";
+	var nextButton = document.getElementById("nextRound");
+	nextButton.style.display = "none";
+	var roundOver = document.getElementById("roundOver");
+	roundOver.style.display = "none";
+
+
+
+	camera.position.set( 800, 1600, 0 );
+	camera.lookAt( 0, 0, 0 );
+
 	rebuild([]);
 	currentBuilder = false;
 	var roundOver = document.getElementById("roundOver");
@@ -162,7 +174,7 @@ socket.on('end Game', function(msg) {
 	clearInterval(gameTimerInterval);
 	document.getElementById("GuiTime").innerHTML = "Player Done";
 	startGameButton.disabled = false;
-
+	autoRotate =false;
 });
 
 socket.on('game Update', function(msg,admin) {
@@ -381,7 +393,7 @@ function init() {
 	controls.minDistance = 300;
 	controls.maxDistance = 2000;
 	controls.autoRotate = false;
-	controls.autoRotateSpeed = 10;
+	controls.autoRotateSpeed = 5;
 	// roll-over helpers
 
 	rollOverGeo = new THREE.BoxGeometry( 62.5, 62.5, 62.5 );
