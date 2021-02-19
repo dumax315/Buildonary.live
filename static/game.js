@@ -14,6 +14,7 @@ var input = document.getElementById('input');
 var roomInfo = document.getElementById("roomInfo");
 let countDownDate, gameTimerInterval;
 var playersEnd = document.getElementById("endRoundScores");
+var startGameButton = document.getElementById("newGame");
 //entering the room
 var pathname = window.location.pathname;
 roomInfo.innerHTML += "your room code is: " + pathname.split("/")[2];
@@ -84,12 +85,15 @@ socket.on('update Users', function(msg,admin) {
 });
 
 socket.on('New Round', function(msg) {
+	var roundsCounter = document.getElementById("GuiRounds");
+	roundsCounter.innerHTML = "Round: "+(msg["rounds"]-msg["roundsLeft"]) +"/"+ msg["rounds"];
 	var nextButton = document.getElementById("nextRound");
 	nextButton.style.display = "none";
 	var roundOver = document.getElementById("roundOver");
 	roundOver.style.display = "none";
 
 	rebuild([]);
+
 	countDownDate = msg["time"];
 	gameTimer();
 	gameTimerInterval = setInterval(gameTimer,1000);
@@ -101,20 +105,42 @@ socket.on('round Over', function(msg) {
 	controls.autoRotate = true;
 	currentBuilder = false;
 	var roundOver = document.getElementById("roundOver");
+	var endWord = document.getElementById("endWord");
+	console.log(msg["word"]);
+	endWord.innerHTML = msg["word"];
 	roundOver.style.display = "flex";
 	clearInterval(gameTimerInterval);
-	document.getElementById("GuiTime").innerHTML = "Round Over";
+	document.getElementById("GuiTime").innerHTML = "Player Done";
+	
 	playersEnd.innerHTML = "";
+	var topUserScore = 0;
+	var topUser;
+	var image;
 	for (var i = 0; i < msg.playerNames.length; i++) {
 		var item = document.createElement('li');
 		var score = document.createElement('li');
 		item.textContent = msg.playerNames[i];
 		score.textContent = msg.playerScores[i];
 		item.classList.add("username");
+		item.setAttribute("id",msg.playerIds[i] )
 		score.classList.add("userscore");
+		
+		if(msg.playerScores[i] > topUserScore){
+			topUserScore = msg.playerScores[i];
+			topUser = msg.playerIds[i];
+			
+		}
 		playersEnd.appendChild(item);
 		playersEnd.appendChild(score);
 	}
+	if(topUserScore>1){
+		var item = document.getElementById(topUser);
+		image = document.createElement("img");
+		image.src = "../../crown.svg"
+		image.classList.add("playerLocater");
+		item.appendChild(image);
+	}
+	
 	//show round number
 	if(msg["currentPlayer"] == socket.id){
 		var nextButton = document.getElementById("nextRound");
@@ -123,11 +149,22 @@ socket.on('round Over', function(msg) {
 	}
 });
 
+socket.on('end Game', function(msg) {
+	rebuild([]);
+	currentBuilder = false;
+	var roundOver = document.getElementById("roundOver");
+	roundOver.style.display = "none";
+	clearInterval(gameTimerInterval);
+	document.getElementById("GuiTime").innerHTML = "Player Done";
+	startGameButton.disabled = false;
+
+});
+
 socket.on('game Update', function(msg,admin) {
 	var wordToGuessDiv = document.getElementById("wordToGuess");
 	
 	countDownDate = msg["time"];
-
+	
 
 	if(msg["currentPlayer"] == socket.id){
 		currentBuilder = true;
@@ -158,10 +195,12 @@ socket.on('game Update', function(msg,admin) {
 document.getElementById("newGame").addEventListener("click", startRound);
 document.getElementById("nextRound").addEventListener("click", startRound);
 
-function startRound() {
+function startRound(evt) {
+	var test = document.getElementById("rounds").value;
+	startGameButton.disabled = true;
 	console.log("startRound");
 
-	socket.emit('start Round');
+	socket.emit('start Round',test);
 }
 //get class by id 
 //for onclick

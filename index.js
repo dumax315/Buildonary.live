@@ -62,11 +62,13 @@ function findObjectByKey(array, key, value) {
 }
 
 function endRound(myroom,locat){
-	roomData[locat]["word"] = "";
+	
 	io.to(myroom).emit('round Over', roomData[locat]);
+	roomData[locat]["word"] = "";
 }
 
-function startRound(myroom,mySocketId){
+function startRound(myroom,mySocketId,rounds = 1){
+	var stillGoing = true;
 	var wordToGuess = words[Math.floor((Math.random() * words.length))];
 	var locat = findObjectByKey(roomData, "code", myroom);
 	var playerPlace = roomData[locat]["playerIds"].indexOf(roomData[locat]["currentPlayer"])
@@ -76,23 +78,47 @@ function startRound(myroom,mySocketId){
 	}
 	if(playerPlace == 0) {
 		roomData[locat]["currentPlayer"] = roomData[locat]["playerIds"][0];
+		roomData[locat]["rounds"] = rounds;
+		roomData[locat]["roundsLeft"] = rounds;
 	} else if(playerPlace >=roomData[locat]["playerIds"].length){
 		roomData[locat]["currentPlayer"] = roomData[locat]["playerIds"][0];
-		playerPlace = 0;
+		
+		roomData[locat]["roundsLeft"] -= 1;
+		if(roomData[locat]["roundsLeft"]<1){
+			//game over code
+			stillGoing = false;
+			roomData[locat]["board"] = [];
+			for(var i =0;i<roomData[locat]["playerScores"].length;i++){
+				roomData[locat]["playerScores"][i] = 0;
+			}
+			roomData[locat]["currentPlayer"] = "";
+			console.log(roomData[locat])
+			io.to(myroom).emit('end Game', roomData[locat]);
+			
+			
+		}else{
+			playerPlace = 0;
+		}
 	}else{
 		roomData[locat]["currentPlayer"] = roomData[locat]["playerIds"][playerPlace];
 	}
+	
 	clearTimeout(roomIntervals[locat]["timeOut"]);
-	roomData[locat]["playerSolved"][playerPlace] = true;
-	//game timer code in millisecends twice
-	roomData[locat]["time"] = new Date().getTime()+75000;
-	roomIntervals[locat]["timeOut"] = setTimeout(endRound, 75000,myroom,locat);
-	console.log(roomData[locat]["time"]);
-	roomData[locat]["board"] = [];
-	roomData[locat]["word"] = wordToGuess;
-	io.to(myroom).emit('New Round', roomData[locat]);
-	io.to(myroom).emit('game Update', roomData[locat], mySocketId);
-	io.to(myroom).emit('update Users', roomData[locat]);
+
+	
+	console.log(stillGoing)
+	if(stillGoing){
+		roomData[locat]["playerSolved"][playerPlace] = true;
+		//game timer code in millisecends twice
+		roomData[locat]["time"] = new Date().getTime()+75000;
+		roomIntervals[locat]["timeOut"] = setTimeout(endRound, 75000,myroom,locat);
+		console.log(roomData[locat]["time"]);
+		roomData[locat]["board"] = [];
+		roomData[locat]["word"] = wordToGuess;
+		io.to(myroom).emit('New Round', roomData[locat]);
+		io.to(myroom).emit('game Update', roomData[locat], mySocketId);
+		io.to(myroom).emit('update Users', roomData[locat]);
+	}
 }
 
 io.on('connection', (socket) => {
@@ -133,7 +159,8 @@ io.on('connection', (socket) => {
 
 		var locat = findObjectByKey(roomData, "code", myroom);
 		var playerInfoLocation = roomData[locat]["playerIds"].indexOf(socket.id);
-		if(msg.toLowerCase() == roomData[locat]["word"].toLowerCase()){
+		try {
+			if(msg.toLowerCase() == roomData[locat]["word"].toLowerCase()){
 			var now = new Date().getTime();
 			// Find the distance between now and the count down date
 			var distance = Math.floor((roomData[locat]["time"] - now)/100);
@@ -148,10 +175,16 @@ io.on('connection', (socket) => {
 				}
 			}
 			
-		}else{
+			}else{
 
-			io.to(myroom).emit('chat message', msg, roomData[locat]["playerNames"][playerInfoLocation]);
+				io.to(myroom).emit('chat message', msg, roomData[locat]["playerNames"][playerInfoLocation]);
+			}
+			
 		}
+		catch(err) {
+			console.log(err);
+		}
+		
 
   });
 
@@ -178,13 +211,14 @@ io.on('connection', (socket) => {
   });
 
 	socket.on('set Username', (msg) => {
-		myUserName = msg;
+		myUserName = msg.substring(0, 14);;
     console.log(msg);
 		
   });
 
-	socket.on('start Round', () => {
-		startRound(myroom,mySocketId);
+	socket.on('start Round', (msg) => {
+
+		startRound(myroom,mySocketId,msg);
 		
 		
   });
