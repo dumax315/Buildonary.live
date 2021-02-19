@@ -26,11 +26,16 @@ var linkText = document.createTextNode("https://buildio.theohalpern.repl.co" + p
 a.appendChild(linkText);
 a.href = "https://buildio.theohalpern.repl.co" + pathname;
 a.target = "_blank";
+a.id = "shareUrl";
 roomInfo.appendChild(document.createElement('br'));
 roomInfo.innerHTML += "Share this link with friends: ";
 roomInfo.appendChild(a);
-
-
+roomInfo.innerHTML += " ";
+var b = document.createElement('input');
+b.value = "Copy Url";
+b.id = "copyLinkButton";
+b.type = "button";
+roomInfo.appendChild(b);
 
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('username');
@@ -188,7 +193,7 @@ socket.on('game Update', function(msg,admin) {
 				wordToGuessDiv.innerHTML += " _ "
 			}
 		}
-		controls.autoRotate = true;
+		controls.autoRotate = false;
 	}
 	
 });
@@ -202,6 +207,64 @@ function startRound(evt) {
 
 	socket.emit('start Round',test);
 }
+
+
+
+document.getElementById("copyLinkButton").addEventListener("click", function() {
+    copyToClipboard(document.getElementById("shareUrl"));
+});
+
+function copyToClipboard(elem) {
+	  // create hidden text element, if it doesn't already exist
+    var targetId = "_hiddenCopyText_";
+    var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
+    var origSelectionStart, origSelectionEnd;
+    if (isInput) {
+        // can just use the original source element for the selection and copy
+        target = elem;
+        origSelectionStart = elem.selectionStart;
+        origSelectionEnd = elem.selectionEnd;
+    } else {
+        // must use a temporary form element for the selection and copy
+        target = document.getElementById(targetId);
+        if (!target) {
+            var target = document.createElement("textarea");
+            target.style.position = "absolute";
+            target.style.left = "-9999px";
+            target.style.top = "0";
+            target.id = targetId;
+            document.body.appendChild(target);
+        }
+        target.textContent = elem.textContent;
+    }
+    // select the content
+    var currentFocus = document.activeElement;
+    target.focus();
+    target.setSelectionRange(0, target.value.length);
+    
+    // copy the selection
+    var succeed;
+    try {
+    	  succeed = document.execCommand("copy");
+    } catch(e) {
+        succeed = false;
+    }
+    // restore original focus
+    if (currentFocus && typeof currentFocus.focus === "function") {
+        currentFocus.focus();
+    }
+    
+    if (isInput) {
+        // restore prior selection
+        elem.setSelectionRange(origSelectionStart, origSelectionEnd);
+    } else {
+        // clear temporary content
+        target.textContent = "";
+    }
+    return succeed;
+}
+
+
 //get class by id 
 //for onclick
 //update colorValueLarge
@@ -266,7 +329,7 @@ let boxDem= [1,1];
 let canvas;
 let offset;
 init();
-var gui = new GUI({ autoPlace: false });
+/*var gui = new GUI({ autoPlace: false });
 
 var customContainer = document.getElementById('Gui');
 customContainer.appendChild(gui.domElement);
@@ -274,7 +337,9 @@ customContainer.appendChild(gui.domElement);
 var conf = { color : '#f1c40f' };    
 gui.addColor(conf, 'color').onChange( function(colorValue) {
     colorValueLarge = colorValue;
-});
+});*/
+
+
 /*
 gui.add( {"Voxel Width": 1}, 'Voxel Width', 1, 4 ).onChange( function (val) {
 	boxDem[0] = val;
@@ -316,7 +381,7 @@ function init() {
 	controls.minDistance = 300;
 	controls.maxDistance = 2000;
 	controls.autoRotate = false;
-	controls.autoRotateSpeed = 1;
+	controls.autoRotateSpeed = 10;
 	// roll-over helpers
 
 	rollOverGeo = new THREE.BoxGeometry( 62.5, 62.5, 62.5 );

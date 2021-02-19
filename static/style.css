@@ -88,11 +88,12 @@ body{
 	margin: 0px;
 	padding: 0px;
 	list-style-type: none;
-	height: 60%;
 	border-width: 5px 0px 5px 5px;
 	/*max-width: 130px;*/
 	background-color: white;
 	margin-left:3%;
+	height: fit-content;
+  min-height: 60%;
 }
 
 .username {
@@ -225,7 +226,7 @@ body {
 }
 #roomInfo{
 	margin: auto;
-	max-width: 600px;
+	max-width: 800px;
 	text-align: center;
 	background-color: #4CAF50;
 	border-radius: 20px;
@@ -301,7 +302,7 @@ body {
   background-color: #00CC00;
 }
 .custom-radios input[type=radio]#color-4 + label span {
-  background-color: #e74c3c;
+  background-color: #ff0000;
 }
 .custom-radios input[type=radio]#color-5 + label span {
   background-color: #000;
@@ -326,6 +327,18 @@ body {
 }
 .custom-radios input[type=radio]#color-12 + label span {
   background-color: #ff66cc;
+}
+.custom-radios input[type=radio]#color-13 + label span {
+  background-color: #602F0C;
+}
+.custom-radios input[type=radio]#color-14 + label span {
+  background-color: #0C0662;
+}
+.custom-radios input[type=radio]#color-15 + label span {
+  background-color: #C1C1C1;
+}
+.custom-radios input[type=radio]#color-16 + label span {
+  background-color: #C13500;
 }
 .custom-radios input[type=radio]:checked + label span img {
   opacity: 1;

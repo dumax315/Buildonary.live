@@ -6,7 +6,7 @@ const io = require('socket.io')(http);
 const openRooms = [];
 let roomData = [];
 let roomIntervals = [];
-var words = ["Elephant", "Ocean", "Book", "Egg", "House", "Dog", "Ball", "Star", "Shirt", "Underwear", "Ice Cream", "Drum", "Christmas Tree", "Spider", "Shoe", "Smile", "Cup", "Hat", "Cookie", "Bird", "Kite", "Snowman", "Butterfly", "Cupcake", "Fish", "Grapes", "Socks", "Tv", "Bed", "Phone", "Doll", "Trash Can", "Skateboard", "Sleep", "Sad", "Airplane", "Nose", "Eyes", "Apple", "Sun", "Sandwich", "Cherry", "Bubble", "Moon", "Snow", "Candy", "Roof", "Book", "Rabbit", "Arm", "Arm", "Crayon", "Jump", "Pig", "Monkey", "Baby", "Happy", "Hopscotch", "Spider", "Bird", "Doll", "Wings", "Turtle", "Room", "Drum", "Ear", "Cheek", "Smile", "Jar", "Chin", "Telephone", "Mouth", "Basketball", "Tail", "Airplane", "Tree", "Star", "Point", "Scissors", "Elephant", "Jump", "Chair", "Pinch", "Mosquito", "Sunglasses", "Head", "Kick", "Football", "Skip", "Dance", "Alligator", "Stop", "Door", "Blinking", "Swing", "Pen", "Apple", "Car", "Spoon", "Sleep", "Pillow", "Flower", "Dog", "Sneeze", "Book", "Circle", "Icecream", "Milk", "Baseball", "Clap", "Kangaroo", "Balloon", "Drink", "Robot", "Chicken", "Rock", "Camera", "Book", "Rabbit", "Arm", "Arm", "Crayon", "Jump", "Pig", "Monkey", "Baby", "Happy", "Hopscotch", "Spider", "Bird", "Doll", "Wings", "Turtle", "Room", "Drum", "Ear", "Cheek", "Smile", "Jar", "Chin", "Telephone", "Mouth", "Basketball", "Tail", "Airplane", "Tree", "Star", "Baseball", "Clap", "Kangaroo", "Balloon", "Drink", "Robot", "Chicken", "Rock", "Camera", "Book", "Rabbit", "Arm", "Arm", "Crayon", "Jump", "Pig", "Monkey", "Baby", "Happy", "Hopscotch", "Spider", "Bird", "Doll", "Wings", "Turtle", "Room", "Drum", "Ear", "Cheek", "Smile", "Jar", "Chin", "Telephone", "Mouth", "Basketball", "Tail", "Airplane", "Tree", "Star", "Point", "Scissors", "Elephant", "Jump", "Chair", "Pinch", "Mosquito", "Sunglasses", "Head", "Kick", "Football"];
+var words = ["Elephant", "Ocean", "Book", "Egg", "House", "Dog", "Ball", "Star", "Shirt", "Underwear", "Ice Cream", "Drum", "Spider", "Shoe", "Smile", "Cup", "Hat", "Cookie", "Bird", "Kite", "Snowman", "Butterfly", "Cupcake", "Fish", "Grapes", "Socks", "Tv", "Bed", "Phone", "Doll", "Trash Can", "Skateboard", "Sleep", "Sad", "Airplane", "Nose", "Eyes", "Apple", "Sun", "Sandwich", "Cherry", "Bubble", "Moon", "Snow", "Candy", "Roof", "Book", "Rabbit", "Arm", "Arm", "Crayon", "Jump", "Pig", "Monkey", "Baby", "Happy", "Hopscotch", "Spider", "Bird", "Doll", "Wings", "Turtle", "Room", "Drum", "Ear", "Cheek", "Smile", "Jar", "Chin", "Telephone", "Mouth", "Basketball", "Tail", "Airplane", "Tree", "Star", "Point", "Scissors", "Elephant", "Jump", "Chair", "Pinch", "Mosquito", "Sunglasses", "Head", "Kick", "Football", "Skip", "Dance", "Alligator", "Stop", "Door", "Blinking", "Swing", "Pen", "Apple", "Car", "Spoon", "Sleep", "Pillow", "Flower", "Dog", "Sneeze", "Book", "Circle", "Icecream", "Milk", "Baseball", "Clap", "Kangaroo", "Balloon", "Drink", "Robot", "Chicken", "Rock", "Camera", "Book", "Rabbit", "Arm", "Arm", "Crayon", "Jump", "Pig", "Monkey", "Baby", "Happy", "Hopscotch", "Spider", "Bird", "Doll", "Wings", "Turtle", "Room", "Drum", "Ear", "Cheek", "Smile", "Jar", "Chin", "Telephone", "Mouth", "Basketball", "Tail", "Airplane", "Tree", "Star", "Baseball", "Clap", "Kangaroo", "Balloon", "Drink", "Robot", "Chicken", "Rock", "Camera", "Book", "Rabbit", "Arm", "Arm", "Crayon", "Jump", "Pig", "Monkey", "Baby", "Happy", "Hopscotch", "Spider", "Bird", "Doll", "Wings", "Turtle", "Room", "Drum", "Ear", "Cheek", "Smile", "Jar", "Chin", "Telephone", "Mouth", "Basketball", "Tail", "Airplane", "Tree", "Star", "Point", "Scissors", "Elephant", "Jump", "Chair", "Pinch", "Mosquito", "Sunglasses", "Head", "Kick", "Football"];
 app.use( express.static('static'))
 
 app.get('/', (req, res) => {
@@ -61,8 +61,8 @@ function findObjectByKey(array, key, value) {
 	return null;
 }
 
-function endRound(myroom,locat){
-	
+function endRound(myroom,locat,mySocketId){
+	roomIntervals[locat]["timeOut"] = setTimeout(startRound, 15000,myroom,mySocketId);
 	io.to(myroom).emit('round Over', roomData[locat]);
 	roomData[locat]["word"] = "";
 }
@@ -111,7 +111,7 @@ function startRound(myroom,mySocketId,rounds = 1){
 		roomData[locat]["playerSolved"][playerPlace] = true;
 		//game timer code in millisecends twice
 		roomData[locat]["time"] = new Date().getTime()+75000;
-		roomIntervals[locat]["timeOut"] = setTimeout(endRound, 75000,myroom,locat);
+		roomIntervals[locat]["timeOut"] = setTimeout(endRound, 75000,myroom,locat,socket.id);
 		console.log(roomData[locat]["time"]);
 		roomData[locat]["board"] = [];
 		roomData[locat]["word"] = wordToGuess;
@@ -171,17 +171,18 @@ io.on('connection', (socket) => {
 				io.to(myroom).emit('update Users', roomData[locat]);
 				if(roomData[locat]["playerSolved"].indexOf(false)==-1){
 					clearTimeout(roomIntervals[locat]["timeOut"]);
-					endRound(myroom,locat);
+					endRound(myroom,locat,socket.id);
 				}
 			}
 			
 			}else{
 
-				io.to(myroom).emit('chat message', msg, roomData[locat]["playerNames"][playerInfoLocation]);
+				io.to(myroom).emit('chat message', msg.substring(0, 20), roomData[locat]["playerNames"][playerInfoLocation]);
 			}
 			
 		}
 		catch(err) {
+			io.to(myroom).emit('chat message', msg.substring(0, 20), roomData[locat]["playerNames"][playerInfoLocation]);
 			console.log(err);
 		}
 		
@@ -211,7 +212,7 @@ io.on('connection', (socket) => {
   });
 
 	socket.on('set Username', (msg) => {
-		myUserName = msg.substring(0, 14);;
+		myUserName = msg.substring(0, 14);
     console.log(msg);
 		
   });
