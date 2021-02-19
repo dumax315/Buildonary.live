@@ -114,6 +114,12 @@ body{
 	width:45px;
 }
 
+.crown {
+	position: absolute;
+	/* float: left; */
+	left: 0px;
+	width:45px;
+}
 #controls {
 	position: relative;
 	border: 5px solid red;

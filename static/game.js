@@ -142,7 +142,8 @@ socket.on('round Over', function(msg) {
 		var item = document.getElementById(topUser);
 		image = document.createElement("img");
 		image.src = "../../crown.svg"
-		image.classList.add("playerLocater");
+		
+		image.classList.add("crown");
 		item.appendChild(image);
 	}
 	
@@ -174,7 +175,7 @@ socket.on('end Game', function(msg) {
 	clearInterval(gameTimerInterval);
 	document.getElementById("GuiTime").innerHTML = "Player Done";
 	startGameButton.disabled = false;
-	autoRotate =false;
+	controls.autoRotate =false;
 });
 
 socket.on('game Update', function(msg,admin) {
