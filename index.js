@@ -69,10 +69,12 @@ function endRound(myroom,locat,mySocketId){
 	}
 	catch(err) {
 	console.log(err);
-}
+	}
 }
 
 function startRound(myroom,mySocketId,rounds = 1){
+	try{
+
 	var stillGoing = true;
 	var wordToGuess = words[Math.floor((Math.random() * words.length))];
 	var locat = findObjectByKey(roomData, "code", myroom);
@@ -123,6 +125,10 @@ function startRound(myroom,mySocketId,rounds = 1){
 		io.to(myroom).emit('New Round', roomData[locat]);
 		io.to(myroom).emit('game Update', roomData[locat], mySocketId);
 		io.to(myroom).emit('update Users', roomData[locat]);
+	}
+	}
+	catch(err) {
+	console.log(err);
 	}
 }
 
@@ -182,6 +188,7 @@ io.on('connection', (socket) => {
 				roomData[locat]["playerScores"][playerInfoLocation] += distance;
 				roomData[locat]["playerSolved"][playerInfoLocation] = true;
 				io.to(myroom).emit('update Users', roomData[locat]);
+				io.to(myroom).emit('chat message', "Guessed the Answer!", roomData[locat]["playerNames"][playerInfoLocation]);
 				if(roomData[locat]["playerSolved"].indexOf(false)==-1){
 					clearTimeout(roomIntervals[locat]["timeOut"]);
 					endRound(myroom,locat,socket.id);
