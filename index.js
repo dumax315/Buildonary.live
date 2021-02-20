@@ -72,7 +72,7 @@ function endRound(myroom,locat,mySocketId){
 	}
 }
 
-function startRound(myroom,mySocketId,rounds = 1){
+function startRound(myroom,mySocketId,rounds = 1,timeToBuild = 100){
 	try{
 
 	var stillGoing = true;
@@ -87,6 +87,7 @@ function startRound(myroom,mySocketId,rounds = 1){
 		roomData[locat]["currentPlayer"] = roomData[locat]["playerIds"][0];
 		roomData[locat]["rounds"] = rounds;
 		roomData[locat]["roundsLeft"] = rounds;
+		roomData[locat]["timeToBuild"] = timeToBuild;
 	} else if(playerPlace >=roomData[locat]["playerIds"].length){
 		roomData[locat]["currentPlayer"] = roomData[locat]["playerIds"][0];
 		
@@ -117,8 +118,8 @@ function startRound(myroom,mySocketId,rounds = 1){
 	if(stillGoing){
 		roomData[locat]["playerSolved"][playerPlace] = true;
 		//game timer code in millisecends twice
-		roomData[locat]["time"] = new Date().getTime()+75000;
-		roomIntervals[locat]["timeOut"] = setTimeout(endRound, 75000,myroom,locat,mySocketId);
+		roomData[locat]["time"] = new Date().getTime()+roomData[locat]["timeToBuild"] *1000;
+		roomIntervals[locat]["timeOut"] = setTimeout(endRound, roomData[locat]["timeToBuild"] *1000,myroom,locat,mySocketId);
 		console.log(roomData[locat]["time"]);
 		roomData[locat]["board"] = [];
 		roomData[locat]["word"] = wordToGuess;
@@ -237,9 +238,9 @@ io.on('connection', (socket) => {
 		
   });
 
-	socket.on('start Round', (msg) => {
+	socket.on('start Round', (msg, timeToBuild) => {
 
-		startRound(myroom,mySocketId,msg);
+		startRound(myroom,mySocketId,msg,timeToBuild);
 		
 		
   });
