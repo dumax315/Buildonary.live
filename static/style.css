@@ -311,7 +311,7 @@ body {
   background-color: #ff0000;
 }
 .custom-radios input[type=radio]#color-5 + label span {
-  background-color: #000;
+  background-color: #0a0a0a;
 }
 .custom-radios input[type=radio]#color-6 + label span {
   background-color: #ffffff;

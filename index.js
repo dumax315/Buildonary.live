@@ -62,9 +62,14 @@ function findObjectByKey(array, key, value) {
 }
 
 function endRound(myroom,locat,mySocketId){
-	roomIntervals[locat]["timeOut"] = setTimeout(startRound, 15000,myroom,mySocketId);
-	io.to(myroom).emit('round Over', roomData[locat]);
-	roomData[locat]["word"] = "";
+	try{
+		roomIntervals[locat]["timeOut"] = setTimeout(startRound, 15000,myroom,mySocketId);
+		io.to(myroom).emit('round Over', roomData[locat]);
+		roomData[locat]["word"] = "";
+	}
+	catch(err) {
+	console.log(err);
+}
 }
 
 function startRound(myroom,mySocketId,rounds = 1){
