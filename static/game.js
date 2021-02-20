@@ -60,7 +60,6 @@ socket.on('chat message', function(msg, sender) {
 });
 
 socket.on('update Users', function(msg,admin) {
-	console.log(msg)
 	players.innerHTML = "";
 	for (var i = 0; i < msg.playerNames.length; i++) {
 		var item = document.createElement('li');
@@ -90,6 +89,7 @@ socket.on('update Users', function(msg,admin) {
 });
 
 socket.on('New Round', function(msg) {
+	voxels = [];
 	var roundsCounter = document.getElementById("GuiRounds");
 	roundsCounter.innerHTML = "Round: "+(msg["rounds"]-msg["roundsLeft"]) +"/"+ msg["rounds"];
 	var nextButton = document.getElementById("nextRound");
@@ -111,7 +111,6 @@ socket.on('round Over', function(msg) {
 	currentBuilder = false;
 	var roundOver = document.getElementById("roundOver");
 	var endWord = document.getElementById("endWord");
-	console.log(msg["word"]);
 	endWord.innerHTML = msg["word"];
 	roundOver.style.display = "flex";
 	clearInterval(gameTimerInterval);
@@ -217,7 +216,7 @@ function startRound(evt) {
 	var test = document.getElementById("rounds").value;
 	startGameButton.disabled = true;
 	console.log("startRound");
-
+	
 	socket.emit('start Round',test);
 }
 
@@ -283,7 +282,6 @@ function copyToClipboard(elem) {
 //update colorValueLarge
 var colorPickerBoxes = document.querySelectorAll(".custom-radios input[type=radio] + label span")
 for(var i = 0;i < colorPickerBoxes.length;i++){
-	console.log();
 	colorPickerBoxes[i].addEventListener("click",changeColor);
 	
 }
@@ -590,7 +588,7 @@ function placeOrDelete() {
 
 				
 			}
-			console.log(voxels)
+			//console.log(voxels)
 			socket.emit('game Update Build', voxels);
 			
 		}
