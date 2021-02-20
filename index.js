@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-
-const openRooms = [];
+let connectCounter =0;
+let openRooms = [];
 let roomData = [];
 let roomIntervals = [];
 var words = ["Elephant", "Ocean", "Book", "Egg", "House", "Dog", "Ball", "Star", "Shirt", "Underwear", "Ice Cream", "Drum", "Spider", "Shoe", "Smile", "Cup", "Hat", "Cookie", "Bird", "Kite", "Snowman", "Butterfly", "Cupcake", "Fish", "Grapes", "Socks", "Tv", "Bed", "Phone", "Doll", "Trash Can", "Skateboard", "Sleep", "Sad", "Airplane", "Nose", "Eyes", "Apple", "Sun", "Sandwich", "Cherry", "Bubble", "Moon", "Snow", "Candy", "Roof", "Book", "Rabbit", "Arm", "Arm", "Crayon", "Jump", "Pig", "Monkey", "Baby", "Happy", "Hopscotch", "Spider", "Bird", "Doll", "Wings", "Turtle", "Room", "Drum", "Ear", "Cheek", "Smile", "Jar", "Chin", "Telephone", "Mouth", "Basketball", "Tail", "Airplane", "Tree", "Star", "Point", "Scissors", "Elephant", "Jump", "Chair", "Pinch", "Mosquito", "Sunglasses", "Head", "Kick", "Football", "Skip", "Dance", "Alligator", "Stop", "Door", "Blinking", "Swing", "Pen", "Apple", "Car", "Spoon", "Sleep", "Pillow", "Flower", "Dog", "Sneeze", "Book", "Circle", "Icecream", "Milk", "Baseball", "Clap", "Kangaroo", "Balloon", "Drink", "Robot", "Chicken", "Rock", "Camera", "Book", "Rabbit", "Arm", "Arm", "Crayon", "Jump", "Pig", "Monkey", "Baby", "Happy", "Hopscotch", "Spider", "Bird", "Doll", "Wings", "Turtle", "Room", "Drum", "Ear", "Cheek", "Smile", "Jar", "Chin", "Telephone", "Mouth", "Basketball", "Tail", "Airplane", "Tree", "Star", "Baseball", "Clap", "Kangaroo", "Balloon", "Drink", "Robot", "Chicken", "Rock", "Camera", "Book", "Rabbit", "Arm", "Arm", "Crayon", "Jump", "Pig", "Monkey", "Baby", "Happy", "Hopscotch", "Spider", "Bird", "Doll", "Wings", "Turtle", "Room", "Drum", "Ear", "Cheek", "Smile", "Jar", "Chin", "Telephone", "Mouth", "Basketball", "Tail", "Airplane", "Tree", "Star", "Point", "Scissors", "Elephant", "Jump", "Chair", "Pinch", "Mosquito", "Sunglasses", "Head", "Kick", "Football"];
@@ -127,9 +127,9 @@ io.on('connection', (socket) => {
 	let mySocketId = socket.id;
   console.log('a user connected');
 	console.log(socket.id)
-
+	connectCounter++;
 	socket.on('disconnecting', () => {
-    console.log(socket.rooms); // the Set contains at least the socket ID
+    
 		try {
 			var locat = findObjectByKey(roomData, "code", myroom);
 			locatPlace = roomData[locat].playerIds.indexOf(socket.id);
@@ -152,7 +152,15 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
+		connectCounter--;
     console.log('user disconnected');
+		console.log(connectCounter); //number of socket clients connected
+		if(connectCounter == 0) {
+			openRooms = [];
+			roomData = [];
+			roomIntervals = [];
+		}
+		console.log(roomData);
   });
 	//Message
 	socket.on('chat message', (msg) => {
