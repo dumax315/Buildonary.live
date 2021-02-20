@@ -6,7 +6,7 @@ import {
 	TOUCH,
 	Vector2,
 	Vector3
-} from 'https://buildonarylive.theohalpern.repl.co/building/build/three.module.js';
+} from 'https://buildonary.live/building/build/three.module.js';
 
 
 let isShiftDown = false;
