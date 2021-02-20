@@ -1,6 +1,6 @@
 # buildonary
 
-currently hosted at https://Buildio.theohalpern.repl.co
+currently hosted at https://buildonary.live
 
 its like pictonary but you have to build
 
