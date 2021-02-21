@@ -520,10 +520,12 @@ function onDocumentMouseMove( event ) {
 }
 function findObjectByKey(array, key, value) {
 	for (var i = 0; i < array.length; i++) {
-		if (array[i][key].toString() == value.toString()) {
+
+		if (array[i][key].x == value.x && array[i][key].y == value.y && array[i][key].z == value.z) {
 			return i;
 		}
 	}
+	console.log("fail!!!1")
 	return null;
 }
 function onMouseDown( event ) {
