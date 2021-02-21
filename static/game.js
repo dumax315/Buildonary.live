@@ -1,8 +1,8 @@
 import * as THREE from '../../building/build/three.module.js';
 
-import Stats from '../../building/libs/stats.module.js';
+import Stats from '../../building/stats.module.js';
 
-import { GUI } from '../../building/libs/dat.gui.module.js';
+import { GUI } from '../../building/dat.gui.module.js';
 import { OrbitControls } from '../../building/OrbitControls.js';
 //import { OutlineEffect } from '../../building/OutlineEffect.js';
 
