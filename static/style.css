@@ -69,6 +69,7 @@ body{
 
 #messages > li {
 	padding: 0.5rem 1rem;
+	word-wrap: break-word;
 }
 
 #messages > li:nth-child(odd) {
@@ -143,6 +144,8 @@ body{
 	background-color: white;
 	border-left-width: 0px;
 	margin-right:3%;
+	  word-wrap: break-word;
+
 }
 #adminControls {
 	display: none;

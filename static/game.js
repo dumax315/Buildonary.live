@@ -183,10 +183,11 @@ socket.on('game Update', function(msg,admin) {
 	
 	countDownDate = msg["time"];
 	
-	console.log(msg["currentPlayer"] == socket.id);
+	console.log(msg["currentPlayer"] + "  " + socket.id);
 	if(msg["currentPlayer"] == socket.id){
 		currentBuilder = true;
 		wordToGuessDiv.innerHTML = msg["word"];
+		console.log(currentBuilder);
 		//console.log(msg["word"])
 		//var now = new Date().getTime();
 		//var distance = msg["time"] - now;
@@ -205,6 +206,9 @@ socket.on('game Update', function(msg,admin) {
 			}else{
 				wordToGuessDiv.innerHTML += " _ "
 			}
+		}
+		if(msg["word"].length==0){
+			wordToGuessDiv.innerHTML = "<br>";
 		}
 		controls.autoRotate = false;
 	}
@@ -392,7 +396,7 @@ function init() {
 	
 	controls = new OrbitControls(camera, renderer.domElement);
 	controls.minDistance = 300;
-	controls.maxDistance = 2000;
+	controls.maxDistance = 2500;
 	controls.autoRotate = false;
 	controls.autoRotateSpeed = 5;
 	// roll-over helpers
