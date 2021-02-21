@@ -1,9 +1,9 @@
-import * as THREE from 'https://buildonarylive.theohalpern.repl.co/building/build/three.module.js';
+import * as THREE from 'https://buildonary.live/building/build/three.module.js';
 
-import Stats from 'https://buildonarylive.theohalpern.repl.co/building/libs/stats.module.js';
+import Stats from 'https://buildonary.live/building/libs/stats.module.js';
 
-import { GUI } from 'https://buildonarylive.theohalpern.repl.co/building/libs/dat.gui.module.js';
-import { OrbitControls } from 'https://buildonarylive.theohalpern.repl.co/building/OrbitControls.js';
+import { GUI } from 'https://buildonary.live/building/libs/dat.gui.module.js';
+import { OrbitControls } from 'https://buildonary.live/building/OrbitControls.js';
 
 var socket = io();
 
@@ -22,9 +22,9 @@ roomInfo.innerHTML += "your room code is: " + pathname.split("/")[2];
 let currentBuilder = false;
 
 var a = document.createElement('a');
-var linkText = document.createTextNode("https://buildonarylive.theohalpern.repl.co" + pathname);
+var linkText = document.createTextNode("https://buildonary.live" + pathname);
 a.appendChild(linkText);
-a.href = "https://buildonarylive.theohalpern.repl.co" + pathname;
+a.href = "https://buildonary.live" + pathname;
 a.target = "_blank";
 a.id = "shareUrl";
 roomInfo.appendChild(document.createElement('br'));
