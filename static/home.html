@@ -26,7 +26,7 @@
 			<form id="info">
 				<label for="uname">Username:</label>
 				<input type="text" id="uname" name="uname"><br>
-			
+				<button onclick="joinPublic()">Join the Public Room</button><br>
 				<button onclick="newRoom()">Create a new private room</button><br>
 				<button onclick="joinRoom()">Join existing private room</button><br>
 			
@@ -55,7 +55,22 @@
 			function joinRoom(){
 				const form = document.querySelector('form');
 				const data = Object.fromEntries(new FormData(form).entries());
-				location.href = "/room/"+data.rcode+"?username="+data.uname;
+				if(data.uname !== ""){
+					location.href = "/room/"+data.rcode+"?username="+data.uname;
+				}else{
+					location.href = "/room/"+data.rcode;
+				}
+				
+			}
+			function joinPublic(){
+				const form = document.querySelector('form');
+				const data = Object.fromEntries(new FormData(form).entries());
+				if(data.uname !== ""){
+					location.href = "/room/public?username="+data.uname;
+				}else{
+					location.href = "/room/public";
+				}
+				
 			}
 		</script>
   </body>
