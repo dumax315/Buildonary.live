@@ -182,7 +182,7 @@ io.on('connection', (socket) => {
   });
 	//Message
 	socket.on('chat message', (msg) => {
-
+		try {
 		var locat = findObjectByKey(roomData, "code", myroom);
 		var playerInfoLocation = roomData[locat]["playerIds"].indexOf(socket.id);
 		try {
@@ -209,6 +209,10 @@ io.on('connection', (socket) => {
 			
 		}
 		catch(err) {
+			io.to(myroom).emit('chat message', msg.substring(0, 20), roomData[locat]["playerNames"][playerInfoLocation]);
+			console.log(err);
+		}
+		}catch(err) {
 			io.to(myroom).emit('chat message', msg.substring(0, 20), roomData[locat]["playerNames"][playerInfoLocation]);
 			console.log(err);
 		}
