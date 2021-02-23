@@ -183,7 +183,7 @@ socket.on('game Update', function(msg,admin) {
 	
 	countDownDate = msg["time"];
 	
-	console.log(msg["currentPlayer"] + "  " + socket.id);
+	//console.log(msg["currentPlayer"] + "  " + socket.id);
 	if(msg["currentPlayer"] == socket.id){
 		currentBuilder = true;
 		wordToGuessDiv.innerHTML = msg["word"];
