@@ -249,7 +249,11 @@ io.on('connection', (socket) => {
   });
 
 	socket.on('start Round', (msg, timeToBuild) => {
-
+		if(timeToBuild>300){
+			timeToBuild = 300;
+		}else if(timeToBuild<15){
+			timeToBuild = 15;
+		}
 		startRound(myroom,mySocketId,msg,timeToBuild);
 		
 		
@@ -257,11 +261,15 @@ io.on('connection', (socket) => {
 
 
 	socket.on('game Update Build', (msg) => {
+		try{
 		var locat = findObjectByKey(roomData, "code", myroom);
 		roomData[locat]["board"] = msg;
 		
 		io.to(myroom).emit('game Update', roomData[locat], mySocketId);
-		
+		}
+		catch(err) {
+			console.log(err);
+		}
   });
 });
 
