@@ -70,7 +70,9 @@ function endRound(myroom,locat,mySocketId){
 			total += roomData[locat]["playerScores"][i];
 		}
 		var playerPlace = roomData[locat]["playerIds"].indexOf(roomData[locat]["currentPlayer"]);
-		roomData[locat]["playerScores"][playerPlace] += Math.floor(total/ roomData[locat]["playerScores"].length);
+		//Please fix some day
+		//drawer doens't get correct points
+		roomData[locat]["playerScores"][playerPlace] += Math.floor(roomData[locat]["playerScores"].length*100);
 		io.to(myroom).emit('round Over', roomData[locat]);
 		roomData[locat]["word"] = "";
 	}
