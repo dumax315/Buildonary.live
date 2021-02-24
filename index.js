@@ -205,12 +205,12 @@ io.on('connection', (socket) => {
 			
 			}else{
 
-				io.to(myroom).emit('chat message', msg.substring(0, 20), roomData[locat]["playerNames"][playerInfoLocation]);
+				io.to(myroom).emit('chat message', msg, roomData[locat]["playerNames"][playerInfoLocation]);
 			}
 			
 		}
 		catch(err) {
-			io.to(myroom).emit('chat message', msg.substring(0, 20), roomData[locat]["playerNames"][playerInfoLocation]);
+			io.to(myroom).emit('chat message', msg, roomData[locat]["playerNames"][playerInfoLocation]);
 			console.log(err);
 		}
 		}catch(err) {

@@ -53,6 +53,7 @@ form.addEventListener('submit', function(e) {
 });
 
 socket.on('chat message', function(msg, sender) {
+	onWindowResize();
 	var item = document.createElement('li');
 	var messagesContain = document.getElementById("messagesContainer");
 	item.textContent = sender + ": " +msg;
@@ -61,6 +62,7 @@ socket.on('chat message', function(msg, sender) {
 });
 
 socket.on('update Users', function(msg,admin) {
+	onWindowResize();
 	players.innerHTML = "";
 	for (var i = 0; i < msg.playerNames.length; i++) {
 		var item = document.createElement('li');
