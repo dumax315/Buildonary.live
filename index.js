@@ -133,6 +133,7 @@ function startRound(myroom,mySocketId,rounds = 1,timeToBuild = 100){
 		console.log(roomData[locat]["time"]);
 		roomData[locat]["board"] = [];
 		roomData[locat]["word"] = wordToGuess;
+		roomData[locat]["letterPlace"] = Math.floor(Math.random() * wordToGuess.length);
 		io.to(myroom).emit('New Round', roomData[locat]);
 		io.to(myroom).emit('game Update', roomData[locat], mySocketId);
 		io.to(myroom).emit('update Users', roomData[locat]);

@@ -21,7 +21,7 @@ var pathname = window.location.pathname;
 roomInfo.innerHTML += "your room code is: " + pathname.split("/")[2];
 
 let currentBuilder = false;
-
+let timeLeft;
 var a = document.createElement('a');
 var linkText = document.createTextNode("https://"+window.location.hostname+pathname);
 a.appendChild(linkText);
@@ -184,7 +184,7 @@ socket.on('game Update', function(msg,admin) {
 	var wordToGuessDiv = document.getElementById("wordToGuess");
 	
 	countDownDate = msg["time"];
-	
+
 	//console.log(msg["currentPlayer"] + "  " + socket.id);
 	if(msg["currentPlayer"] == socket.id){
 		currentBuilder = true;
@@ -201,8 +201,12 @@ socket.on('game Update', function(msg,admin) {
 		currentBuilder = false;
 		rebuild(msg["board"]);
 		wordToGuessDiv.innerHTML = "";
+		console.log(timeLeft);
+		console.log(msg["letterPlace"]);
 		for (var i = 0; i < msg["word"].length; i++){
-			if(msg["word"][i] == " "){
+			if(timeLeft < 50 && i == msg["letterPlace"]){
+				wordToGuessDiv.innerHTML += msg["word"][i];
+			}else if(msg["word"][i] == " "){
 				wordToGuessDiv.innerHTML += "    ";
 
 			}else{
@@ -213,6 +217,7 @@ socket.on('game Update', function(msg,admin) {
 			wordToGuessDiv.innerHTML = "<br>";
 		}
 		controls.autoRotate = false;
+		//console.log(msg["time"]);
 	}
 	
 });
@@ -311,7 +316,7 @@ function gameTimer() {
   // Time calculations for days, hours, minutes and seconds
   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((distance) / 1000);
-
+	timeLeft = seconds;
   // Display the result in the element with id="demo"
   document.getElementById("GuiTime").innerHTML =  seconds + "s ";
 
