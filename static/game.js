@@ -324,7 +324,7 @@ function gameTimer() {
 
 let wireframe, renderer, scene, camera, camera2, controls;
 let wireframe1;
-let matLine, matLineBasic, matLineDashed;
+let matLine, matLineBasic, matLineDashed, effect;
 let stats;
 //let gui;
 let factor = .55;
@@ -343,6 +343,9 @@ let voxels = [];
 var mouseRepte;
 let placespeed = 150;
 let rollOverGeo;
+
+
+
 
 let boxDem= [1,1];
 let canvas;
@@ -454,7 +457,13 @@ function init() {
 	document.getElementById("Gui").appendChild( stats.dom );
 
 	//initGui();
-	
+	/*effect = new OutlineEffect( renderer );
+		new OutlineEffect( renderer, {
+		defaultThickness: 0.01,
+		defaultColor: [ 0, 0, 0 ],
+		defaultAlpha: 0.8,
+		defaultKeepAlive: true // keeps outline material in cache even if material is removed from scene
+	} );*/
 }
 
 function onWindowResize() {
@@ -477,7 +486,7 @@ function animate() {
 	//
 	
 	requestAnimationFrame( animate );
-
+	//effect.render( scene, camera );
 	stats.update();
 
 	// main scene
@@ -506,7 +515,6 @@ function getMousePos(scene, evt) {
 }
 
 function onDocumentMouseMove( event ) {
-	
 	event.preventDefault();
 	
 	mouse.set( ( (event.clientX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.clientY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
