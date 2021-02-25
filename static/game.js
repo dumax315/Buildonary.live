@@ -221,6 +221,16 @@ socket.on('game Update', function(msg,admin) {
 	}
 	
 });
+document.getElementById("saveBuild").addEventListener("click", saveBuild);
+
+function saveBuild() {
+
+	var link = document.getElementById('link');
+  link.setAttribute('download', 'BuildImage.png');
+  link.setAttribute('href', renderer.domElement.toDataURL().replace("image/png", "image/octet-stream"));
+  link.click();
+}
+
 document.getElementById("newGame").addEventListener("click", startRound);
 document.getElementById("nextRound").addEventListener("click", startRound);
 
@@ -389,7 +399,7 @@ animate();
 
 function init() {
 
-	renderer = new THREE.WebGLRenderer( { antialias: true } );
+	renderer = new THREE.WebGLRenderer( { antialias: true, preserveDrawingBuffer: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth * factor, window.innerHeight * factor );
 	var renderDiv = document.getElementById("canvasContainer");
@@ -501,7 +511,7 @@ function animate() {
 
 	
 	// renderer will set this eventually
-
+	
 	renderer.render( scene, camera );
 	
 }
