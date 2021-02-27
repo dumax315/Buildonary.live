@@ -173,8 +173,7 @@ body{
 	background-color: white;
 	border-left-width: 0px;
 	margin-right:3%;
-	  word-wrap: break-word;
-
+	word-wrap: break-word;
 }
 #adminControls {
 	display: none;
@@ -293,6 +292,9 @@ body {
 #endWord{
 	text-align: center;
 }
+#canvasContainer{
+	touch-action: none;
+}
 
 
 
@@ -380,4 +382,131 @@ body {
 }
 .custom-radios input[type=radio]:checked + label span img {
   opacity: 1;
+}
+
+
+#roomInfo{
+	padding: 0px;
+	overflow: hidden;
+}
+#delSw{
+	position: absolute;
+	right:65px;
+	display: none;
+}
+.switch {
+  position: absolute;
+	right: 0;
+  width: 60px;
+  height: 34px;
+	display: none;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .1s;
+  transition: .1s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .1s;
+  transition: .1s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+
+
+@media screen and (max-width: 600px) {
+
+  #about {
+		font-size: 4vw;
+    width: 75%;
+  }
+
+	.custom-radios input[type=radio] + label span{
+		height: 15px;
+		width: 15px;
+	}
+	#info{
+		display: none;
+	}
+	#roomInfo{
+		padding: 0px;
+		overflow: hidden;
+	}
+	#form > button{
+		padding: 0px;
+		margin: 0px;
+	}
+	#input{
+		margin: 0px;
+		border-radius: 0px;
+		border: black;
+		border-style: solid;
+		padding:0;
+	}
+	#form{
+		padding: 0px;
+	}
+	.username{
+		font-size: 3vw;
+	}
+	.userscore{
+		font-size: 4vw;
+	}
+	#chatContainer {
+    border: 2px solid red;
+		border-left-width: 0px;
+	}
+	#controls {
+		border: 2px solid red;
+	}
+	#players {
+		border: 2px solid red;
+		border-right-width: 0px;
+	}
+	#endBox{
+		width: 80%;
+	}
+	.switch{
+		display: inline-block;
+	}
+	#delSw{
+		display: initial;
+	}
+	#Gui{
+		display: none;
+	}
 }

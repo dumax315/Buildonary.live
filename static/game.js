@@ -221,6 +221,7 @@ socket.on('game Update', function(msg,admin) {
 	}
 	
 });
+
 document.getElementById("saveBuild").addEventListener("click", saveBuild);
 
 function saveBuild() {
@@ -242,6 +243,16 @@ function startRound(evt) {
 	
 	socket.emit('start Round',test,time);
 }
+
+
+
+document.getElementById("checkBoxDelete").addEventListener('change', function() {
+  if (this.checked) {
+    isShiftDown = true;
+  } else {
+    isShiftDown = false;
+  }
+});
 
 
 
@@ -673,11 +684,9 @@ function onDocumentMouseMove( event ) {
 }
 
 function onTouchMove( event ) {
-	console.log("Hellow!!!!!!");
 	event.preventDefault(); // prevent scrolling
 	event.stopPropagation();
 	if(event.touches.length == 1) {
-		console.log(event.touches);
 		mouse.set( ( (event.touches[ 0 ].pageX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.touches[ 0 ].pageY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
 		raycaster.setFromCamera( mouse, camera );
 		const intersects = raycaster.intersectObjects( objects );

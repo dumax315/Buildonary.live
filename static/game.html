@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Buildonary.live</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../style.css" rel="stylesheet" type="text/css" />
 		<link rel="icon" href="../../cubes.ico" type="image/icon type">
 		<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -40,10 +41,15 @@
 				<div id="GuiRounds">
 				</div>
 				<div id="Gui">
-
+					
 				</div>
+				<div id="delSw">Deleting:</div>
+				<label class="switch">
+					
+					<input id="checkBoxDelete" type="checkbox">
+					<span class="slider"></span>
+				</label>
 				
-
 				<!-- canvas will go here -->
 				<div id="canvasContainer">
 				</div>
@@ -199,6 +205,7 @@
 					<button id="newGame">Start Game</button>
 				</div>
 				<button id="saveBuild">Save Build As png</button><a id="link"></a>
+				
 				<div id="info">
 					
 					<strong>left click</strong>: add voxel, <strong>shift + left click</strong>: remove voxel<br>
