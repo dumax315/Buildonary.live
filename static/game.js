@@ -102,6 +102,7 @@ socket.on('update Users', function(msg,admin) {
 });
 
 socket.on('New Round', function(msg) {
+	startGameButton.disabled = true;
 	voxels = [];
 	var roundsCounter = document.getElementById("GuiRounds");
 	roundsCounter.innerHTML = "Round: "+(msg["rounds"]-msg["roundsLeft"]) +"/"+ msg["rounds"];
@@ -248,6 +249,7 @@ document.getElementById("nextRound").addEventListener("click", startRound);
 function startRound(evt) {
 	var test = document.getElementById("rounds").value;
 	var time = document.getElementById("time").value;
+	
 	startGameButton.disabled = true;
 	console.log("startRound");
 	
