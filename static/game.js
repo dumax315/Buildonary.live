@@ -61,6 +61,16 @@ socket.on('chat message', function(msg, sender) {
 	messagesContain.scrollTo(0, messagesContain.scrollHeight);
 });
 
+socket.on('chat message win', function(msg, sender) {
+	onWindowResize();
+	var item = document.createElement('li');
+	var messagesContain = document.getElementById("messagesContainer");
+	item.textContent = sender + ": " +msg;
+	item.classList.add("winner");
+	messages.appendChild(item);
+	messagesContain.scrollTo(0, messagesContain.scrollHeight);
+});
+
 socket.on('update Users', function(msg,admin) {
 	onWindowResize();
 	players.innerHTML = "";

@@ -200,7 +200,9 @@ io.on('connection', (socket) => {
 				roomData[locat]["playerScores"][playerInfoLocation] += distance;
 				roomData[locat]["playerSolved"][playerInfoLocation] = true;
 				io.to(myroom).emit('update Users', roomData[locat]);
-				io.to(myroom).emit('chat message', "Guessed the Answer!", roomData[locat]["playerNames"][playerInfoLocation]);
+
+				io.to(myroom).emit('chat message win', "Guessed the Answer!", roomData[locat]["playerNames"][playerInfoLocation]);
+
 				if(roomData[locat]["playerSolved"].indexOf(false)==-1){
 					clearTimeout(roomIntervals[locat]["timeOut"]);
 					endRound(myroom,locat,socket.id);
@@ -209,12 +211,12 @@ io.on('connection', (socket) => {
 			
 			}else{
 
-				io.to(myroom).emit('chat message', msg, roomData[locat]["playerNames"][playerInfoLocation]);
+				io.to(myroom).emit('chat message', msg.substring(0, 100), roomData[locat]["playerNames"][playerInfoLocation]);
 			}
 			
 		}
 		catch(err) {
-			io.to(myroom).emit('chat message', msg, roomData[locat]["playerNames"][playerInfoLocation]);
+			io.to(myroom).emit('chat message', msg.substring(0, 100), roomData[locat]["playerNames"][playerInfoLocation]);
 			console.log(err);
 		}
 		}catch(err) {

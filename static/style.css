@@ -300,6 +300,9 @@ body {
 	bottom: 0;
 	z-index: 800;
 }
+.winner{
+	color: green;
+}
 
 .custom-radios {
 	display: flex;
