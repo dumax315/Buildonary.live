@@ -419,6 +419,10 @@ function init() {
 	controls.maxDistance = 2500;
 	controls.autoRotate = false;
 	controls.autoRotateSpeed = 5;
+	controls.touches = {
+		ONE: THREE.TOUCH.NONE,
+		TWO: THREE.TOUCH.DOLLY_ROTATE
+	}
 	// roll-over helpers
 
 	rollOverGeo = new THREE.BoxGeometry( 62.5, 62.5, 62.5 );
@@ -463,6 +467,10 @@ function init() {
 	document.addEventListener( 'keydown', onDocumentKeyDown );
 	document.addEventListener( 'keyup', onDocumentKeyUp );
 
+	document.addEventListener( 'touchstart', onTouchStart );
+	//document.addEventListener( 'touchend', onTouchEnd );
+	//document.addEventListener( 'touchmove', onTouchMove );
+
 	//
 	canvas = document.querySelector('canvas');
 	window.addEventListener( 'resize', onWindowResize );
@@ -480,6 +488,9 @@ function init() {
 		defaultKeepAlive: true // keeps outline material in cache even if material is removed from scene
 	} );*/
 }
+
+
+
 
 function onWindowResize() {
 
@@ -529,24 +540,7 @@ function getMousePos(scene, evt) {
 	};
 }
 
-function onDocumentMouseMove( event ) {
-	event.preventDefault();
-	
-	mouse.set( ( (event.clientX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.clientY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
-	raycaster.setFromCamera( mouse, camera );
-	const intersects = raycaster.intersectObjects( objects );
 
-	if ( intersects.length > 0 ) {
-
-		const intersect = intersects[ 0 ];
-
-		rollOverMesh.position.copy( intersect.point ).add( intersect.face.normal );
-		rollOverMesh.position.divideScalar( 62.5 ).floor().multiplyScalar( 62.5 ).addScalar( 31.25 );
-
-	}
-	
-	
-}
 function findObjectByKey(array, key, value) {
 	for (var i = 0; i < array.length; i++) {
 
@@ -571,6 +565,27 @@ function onMouseDown( event ) {
 		
 		//mouseRepte = setInterval(placeOrDelete, 150);			
 	}
+}
+
+function onTouchStart( event ) {
+
+	event.preventDefault(); // prevent scrolling
+	if(event.touches.length == 1) {
+		isMouseDown = true;
+		console.log(isMouseDown);
+		mouse.set( ( (event.touches[ 0 ].pageX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.touches[ 0 ].pageY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
+		if(currentBuilder){
+			placeOrDelete();
+			setTimeout(placeOrDelete, 400);
+		}
+	}else{
+		isMouseDown = false;
+		clearInterval(mouseRepte);
+		console.log(isMouseDown)
+	}
+	event.target.addEventListener("touchmove", onTouchMove);
+	event.target.addEventListener("touchend", onTouchEnd);
+
 }
 
 
@@ -636,6 +651,58 @@ function onMouseUp( event ) {
 		clearInterval(mouseRepte);
 		console.log(isMouseDown)
 	}
+}
+
+function onDocumentMouseMove( event ) {
+	event.preventDefault();
+	
+	mouse.set( ( (event.clientX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.clientY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
+	raycaster.setFromCamera( mouse, camera );
+	const intersects = raycaster.intersectObjects( objects );
+
+	if ( intersects.length > 0 ) {
+
+		const intersect = intersects[ 0 ];
+
+		rollOverMesh.position.copy( intersect.point ).add( intersect.face.normal );
+		rollOverMesh.position.divideScalar( 62.5 ).floor().multiplyScalar( 62.5 ).addScalar( 31.25 );
+
+	}
+	
+	
+}
+
+function onTouchMove( event ) {
+	console.log("Hellow!!!!!!");
+	event.preventDefault(); // prevent scrolling
+	event.stopPropagation();
+	if(event.touches.length == 1) {
+		console.log(event.touches);
+		mouse.set( ( (event.touches[ 0 ].pageX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.touches[ 0 ].pageY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
+		raycaster.setFromCamera( mouse, camera );
+		const intersects = raycaster.intersectObjects( objects );
+
+		if ( intersects.length > 0 ) {
+
+			const intersect = intersects[ 0 ];
+
+			rollOverMesh.position.copy( intersect.point ).add( intersect.face.normal );
+			rollOverMesh.position.divideScalar( 62.5 ).floor().multiplyScalar( 62.5 ).addScalar( 31.25 );
+
+		}
+	}
+	
+	
+
+}
+
+function onTouchEnd( event ) {
+	
+	isMouseDown = false;
+	clearInterval(mouseRepte);
+	console.log(isMouseDown)
+	
+
 }
 
 function rebuild(arrayOfVoxels){
