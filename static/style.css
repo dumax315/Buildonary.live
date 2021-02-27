@@ -295,8 +295,11 @@ body {
 #canvasContainer{
 	touch-action: none;
 }
-
-
+#saveBuild{
+	position: absolute;
+	bottom: 0;
+	z-index: 800;
+}
 
 .custom-radios {
 	display: flex;
