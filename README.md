@@ -19,4 +19,3 @@ and trackpad mode
 add end game screen with podium
 
 add custom word list support
-
