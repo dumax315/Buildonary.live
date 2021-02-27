@@ -6,7 +6,11 @@ its like pictonary but you have to build
 
 Discord server: https://discord.gg/ZcjxMS2Cu3
 
-touchscreen support now offical
+Touchscreen support added
+
+## Running the Code
+Just run index.js
+might need to install npm packgease for socket.io and express.js
 
 ## To Do
 
