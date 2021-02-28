@@ -6,7 +6,7 @@ let connectCounter =0;
 let openRooms = [];
 let roomData = [];
 let roomIntervals = [];
-var words = ["Bed", "Leg", "Cup", "Egg", "Bee", "Cow", "Ant", "Ear", "Hat", "Sun", "Pie", "Bug", "Bow", "Box", "Sea", "Eye", "Dog", "Pig", "Cat", "Owl", "Zoo", "Arm", "Bus", "Bat", "Fly", "Car", "Jar", "Ice", "Sky", "Pen", "Ball", "Bowl", "Rain", "Bird", "Worm", "Corn", "Drum", "Milk", "Shoe", "Comb", "Pool", "Moon", "Ship", "Lion", "Duck", "Hand", "Ring", "Crab", "Door", "Coin", "Book", "Desk", "Boat", "Hair", "Leaf", "Fork", "Fire", "Kite", "Bear", "Frog", "Fish", "Leg", "Bark", "Tree", "Jail", "Head", "Bike", "Hook", "Star", "Eye", "Curl", "Knee", "Feet", "Love", "Nose", "Coat", "Ant", "Tail", "Face", "Line", "Flag", "King", "Cube", "Lamp", "Pen", "Kiss", "Bat", "Home", "Grass", "Heart", "Horse", "Pizza", "Clock", "Snake", "Smile", "Beach", "Snail", "Bunny", "Cloud", "Robot", "Angel", "Mouse", "Ghost", "Earth", "Mouth", "Swing", "House", "Sheep", "Music", "Ocean", "Float", "Shirt", "Whale", "Room", "Train", "Zebra", "Water", "Purse", "River", "Wheel", "Light", "Lemon", "Spoon", "Igloo", "Toast", "Night", "Truck", "Phone", "Paper", "Chair", "Pants", "Candy", "Money", "Skull", "Apple", "Plane", "Plate", "Sheet", "Table", "Watch", "Piano", "Shoe", "Island", "Banana", "Bounce", "Turtle", "Cherry", "Circle", "Flower", "Rabbit", "Grape", "Pencil", "Button", "Jacket", "Crayon", "Stairs", "Window", "Mitten", "Blocks", "Rocket", "Lizard", "Kitten", "Bridge", "Zigzag", "Cookie", "Monkey", "Finger", "Cheese", "Orange", "Carrot", "Bucket", "Church", "Laptop", "Bamboo", "Hammer", "Tennis", "Waffle", "Spider"];
+var words = ["Bed", "Leg", "Cup", "Egg", "Bee", "Cow", "Ant", "Ear", "Hat", "Sun", "Pie", "Bug", "Bow", "Box", "Sea", "Eye", "Dog", "Pig", "Cat", "Owl", "Zoo", "Arm", "Bus", "Bat", "Fly", "Car", "Jar", "Ice", "Sky", "Pen", "Ball", "Bowl", "Rain", "Bird", "Worm", "Corn", "Drum", "Milk", "Shoe", "Comb", "Pool", "Moon", "Ship", "Lion", "Duck", "Hand", "Ring", "Crab", "Door", "Coin", "Book", "Desk", "Boat", "Hair", "Leaf", "Fork", "Fire", "Kite", "Bear", "Frog", "Fish", "Leg", "Bark", "Tree", "Jail", "Head", "Bike", "Hook", "Star", "Eye", "Curl", "Knee", "Feet", "Love", "Nose", "Coat", "Ant", "Tail", "Face", "Line", "Flag", "King", "Cube", "Lamp", "Pen", "Kiss", "Bat", "Home", "Grass", "Heart", "Horse", "Pizza", "Clock", "Snake", "Smile", "Beach", "Snail", "Bunny", "Cloud", "Robot", "Angel", "Mouse", "Ghost", "Earth", "Mouth", "Swing", "House", "Sheep", "Music", "Ocean", "Float", "Shirt", "Whale", "Room", "Train", "Zebra", "Water", "Purse", "River", "Wheel", "Light", "Lemon", "Spoon", "Igloo", "Toast", "Night", "Truck", "Phone", "Paper", "Chair", "Pants", "Candy", "Money", "Skull", "Apple", "Plane", "Plate", "Sheet", "Table", "Watch", "Piano", "Shoe", "Island", "Banana", "Bounce", "Turtle", "Cherry", "Circle", "Flower", "Rabbit", "Grape", "Pencil", "Button", "Jacket", "Crayon", "Stairs", "Window", "Blocks", "Rocket", "Lizard", "Kitten", "Bridge", "Zigzag", "Cookie", "Monkey", "Finger", "Cheese", "Orange", "Carrot", "Bucket", "Church", "Laptop", "Bamboo", "Hammer", "Tennis", "Waffle", "Spider"];
 var hardwords = [ "Pillow", "octopus", "balloon", "giraffe", "feather", "blanket", "monster", "ladybug", "snowman", "diamond", "chicken", "rainbow", "chimney", "Eyeball", "Pumpkin", "Rainbow", "Giraffe", "Glasses", "Mailbox", "Snowman", "Unicorn", "Hammock", "pyramid", "Blanket", "Seaweed", "elephant", "football", "mountain", "computer", "lollipop", "backpack", "baseball", "suitcase", "triangle", "airplane", "popsicle", "Starfish", "Lady bug", "Notebook", "Pancakes", "Baseball", "Umbrella", "Goldfish", "Keyboard", "hamburger", "alligator", "Fireworks", "Snowflake", "High heel", "Ice cream", "Butterfly", "Chocolate", "Candy bar", "Surfboard", "Jellyfish", "Dog", "Newspaper", "Ambulance", "Tarantula", "skateboard", "helicopter", "Strawberry", "Toothbrush", "Toothpaste", "Calculator", "Sandcastle", "Polar Bear", "Sunglasses", "Watermelon", "caterpillar", "Mickey Mouse", "Eiffel Tower"];
 app.use( express.static( 'static'));
 
@@ -90,6 +90,7 @@ function startRound(myroom,mySocketId,rounds = 1,timeToBuild = 100){
 	var locat = findObjectByKey(roomData, "code", myroom);
 	var playerPlace = roomData[locat]["playerIds"].indexOf(roomData[locat]["currentPlayer"])
 	playerPlace+=1;
+	roomData[locat]["drawerScore"] = 0;
 	for(var i = 0; i < roomData[locat]["playerSolved"].length;i++ ){
 		roomData[locat]["playerSolved"][i] = false;
 	}
@@ -109,7 +110,6 @@ function startRound(myroom,mySocketId,rounds = 1,timeToBuild = 100){
 			for(var i =0;i<roomData[locat]["playerScores"].length;i++){
 				roomData[locat]["playerScores"][i] = 0;
 			}
-			roomData[locat]["drawerScore"] = 0;
 			roomData[locat]["currentPlayer"] = "";
 			console.log(roomData[locat])
 			io.to(myroom).emit('end Game', roomData[locat]);
