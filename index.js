@@ -71,9 +71,9 @@ function endRound(myroom,locat,mySocketId){
 			total += roomData[locat]["playerScores"][i];
 		}
 		var playerPlace = roomData[locat]["playerIds"].indexOf(roomData[locat]["currentPlayer"]);
-		//Please fix some day
-		//drawer doens't get correct points
-		roomData[locat]["playerScores"][playerPlace] += Math.floor(roomData[locat]["playerScores"].length*100);
+		
+
+		roomData[locat]["playerScores"][playerPlace] += Math.floor(roomData[locat]["drawerScore"] / roomData[locat]["playerScores"].length);
 		io.to(myroom).emit('round Over', roomData[locat]);
 		roomData[locat]["word"] = "";
 	}
@@ -109,6 +109,7 @@ function startRound(myroom,mySocketId,rounds = 1,timeToBuild = 100){
 			for(var i =0;i<roomData[locat]["playerScores"].length;i++){
 				roomData[locat]["playerScores"][i] = 0;
 			}
+			roomData[locat]["drawerScore"] = 0;
 			roomData[locat]["currentPlayer"] = "";
 			console.log(roomData[locat])
 			io.to(myroom).emit('end Game', roomData[locat]);
@@ -199,6 +200,7 @@ io.on('connection', (socket) => {
 			if(!roomData[locat]["playerSolved"][playerInfoLocation]){
 				roomData[locat]["playerScores"][playerInfoLocation] += distance;
 				roomData[locat]["playerSolved"][playerInfoLocation] = true;
+				roomData[locat]["drawerScore"] += distance;
 				io.to(myroom).emit('update Users', roomData[locat]);
 
 				io.to(myroom).emit('chat message win', "Guessed the Answer!", roomData[locat]["playerNames"][playerInfoLocation]);
@@ -234,7 +236,7 @@ io.on('connection', (socket) => {
 		if(!openRooms.includes(msg)){
 			openRooms.push(msg);
 			roomIntervals.push({"roomName":msg});
-			roomData.push({"code":msg, "playerIds":[socket.id], "playerNames":[myUserName], "playerScores":[0],"playerSolved":[false]})
+			roomData.push({"code":msg, "playerIds":[socket.id], "playerNames":[myUserName], "playerScores":[0],"playerSolved":[false],"drawerScore":0})
 			locat = roomData.length-1;
 		}else{
 			locat = findObjectByKey(roomData, "code", msg);
