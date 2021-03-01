@@ -22,7 +22,8 @@ body {
 }
 body{
 	margin:0px;
-	background-image: url(../../background.jpg);
+	background-image: url(../../newBackground.png);
+	background-size: 400px;
 }
 
 #form {

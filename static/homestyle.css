@@ -4,12 +4,16 @@
     font-weight: normal;
     src: local('agent-orange.regular'), url('agent-orange_woff/agent-orange.regular.woff') format('woff');
 }
+
 body{
 	font-family:'agent-orange.regular';
 	font-weight:normal;
 	font-size:30px;
 	text-align: center;
-	background-image: url(background.jpg);
+	
+	background-image: url(newBackground.png);
+	background-size: 400px;
+	
 }
 input[type=text], select {
   padding: 12px 20px;
