@@ -582,7 +582,7 @@ function onMouseDown( event ) {
 		mouse.set( ( (event.clientX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.clientY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
 		if(currentBuilder){
 			placeOrDelete(true);
-			setTimeout(placeOrDelete, 400, false);
+			setTimeout(placeOrDelete, 200, false);
 		}
 		
 		
@@ -599,7 +599,7 @@ function onTouchStart( event ) {
 		mouse.set( ( (event.touches[ 0 ].pageX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.touches[ 0 ].pageY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
 		if(currentBuilder){
 			placeOrDelete(true);
-			setTimeout(placeOrDelete, 400, false);
+			setTimeout(placeOrDelete, 200, false);
 		}
 	}else{
 		isMouseDown = false;
