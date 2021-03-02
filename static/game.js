@@ -581,8 +581,8 @@ function onMouseDown( event ) {
 		console.log(isMouseDown);
 		mouse.set( ( (event.clientX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.clientY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
 		if(currentBuilder){
-			placeOrDelete();
-			setTimeout(placeOrDelete, 400);
+			placeOrDelete(true);
+			setTimeout(placeOrDelete, 400, false);
 		}
 		
 		
@@ -598,8 +598,8 @@ function onTouchStart( event ) {
 		console.log(isMouseDown);
 		mouse.set( ( (event.touches[ 0 ].pageX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.touches[ 0 ].pageY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
 		if(currentBuilder){
-			placeOrDelete();
-			setTimeout(placeOrDelete, 400);
+			placeOrDelete(true);
+			setTimeout(placeOrDelete, 400, false);
 		}
 	}else{
 		isMouseDown = false;
@@ -612,7 +612,7 @@ function onTouchStart( event ) {
 }
 
 
-function placeOrDelete() {
+function placeOrDelete(firstTime = false) {
 	if(isMouseDown){
 
 		raycaster.setFromCamera( mouse, camera );
@@ -663,7 +663,10 @@ function placeOrDelete() {
 			socket.emit('game Update Build', voxels);
 			
 		}
-		setTimeout(placeOrDelete, placespeed);
+		if(!firstTime){
+			setTimeout(placeOrDelete, placespeed);
+		}
+		
 	}
 }
 
