@@ -75,6 +75,7 @@ path {
 @media screen and (max-width: 600px) {
   body {
     font-size: 4vw;
+		background-size: 200px;
   }
   #about {
     font-size: 6vw;
