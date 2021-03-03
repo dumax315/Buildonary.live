@@ -478,6 +478,9 @@ body {
 .custom-radios input[type=radio]#color-6 + label span {
   background-color: #ffffff;
 }
+.custom-radios input[type=radio]#color-6 + label span img {
+	filter: invert(1);
+}
 .custom-radios input[type=radio]#color-7 + label span {
   background-color: #A300BA;
 }
