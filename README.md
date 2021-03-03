@@ -1,21 +1,37 @@
 # buildonary
 
-currently hosted at https://buildonary.live
+currently hosted at 
+https://buildonary.live
 
-its like pictonary but you have to build
+voxel pictionary
 
-Discord server: https://discord.gg/ZcjxMS2Cu3
+> "It's like pictionary but you have to build"
 
-Touchscreen support added
+Discord server: 
+https://discord.gg/ZcjxMS2Cu3
+
+### Latest Change Log
+
+- Touchscreen support added
+
+## To Do
+
+- trackpad mode
+
+- end game screen with podium
+
+- custom word list support
+
+#
+#### For Developers:
 
 ## Running the Code
 Just run index.js
 might need to install npm packgease for socket.io and express.js
 
-## To Do
+#
+### Credits
 
-and trackpad mode
+Theo H.
+Theomhalpern@gmail.com
 
-add end game screen with podium
-
-add custom word list support
