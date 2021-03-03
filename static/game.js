@@ -29,7 +29,7 @@ a.href = "https://"+window.location.hostname+pathname;
 a.target = "_blank";
 a.id = "shareUrl";
 roomInfo.appendChild(document.createElement('br'));
-roomInfo.innerHTML += "Share this link with friends: ";
+// roomInfo.innerHTML += "Share this link with friends: ";
 roomInfo.appendChild(a);
 roomInfo.innerHTML += " ";
 var b = document.createElement('input');
@@ -87,8 +87,9 @@ socket.on('update Users', function(msg,admin) {
 			image.classList.add("playerLocater");
 			item.appendChild(image);
 		}
+		item.appendChild(score);
 		players.appendChild(item);
-		players.appendChild(score);
+		
 		
 	}
 	console.log(socket.id)
@@ -148,8 +149,9 @@ socket.on('round Over', function(msg) {
 			topUser = msg.playerIds[i];
 			
 		}
+		item.appendChild(score);
 		playersEnd.appendChild(item);
-		playersEnd.appendChild(score);
+		
 	}
 	if(topUserScore>1){
 		var item = document.getElementById(topUser);
@@ -582,7 +584,7 @@ function onMouseDown( event ) {
 		mouse.set( ( (event.clientX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.clientY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
 		if(currentBuilder){
 			placeOrDelete(true);
-			setTimeout(placeOrDelete, 200, false);
+			setTimeout(placeOrDelete, 150, false);
 		}
 		
 		
@@ -599,7 +601,7 @@ function onTouchStart( event ) {
 		mouse.set( ( (event.touches[ 0 ].pageX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.touches[ 0 ].pageY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
 		if(currentBuilder){
 			placeOrDelete(true);
-			setTimeout(placeOrDelete, 200, false);
+			setTimeout(placeOrDelete, 150, false);
 		}
 	}else{
 		isMouseDown = false;

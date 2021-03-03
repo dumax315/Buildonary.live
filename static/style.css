@@ -22,8 +22,9 @@ body {
 }
 body{
 	margin:0px;
-	background-image: url(../../newBackground.webp);
-	background-size: 400px;
+	background-color: rgb(41, 41, 41);
+	background-image: url(../../patternBackground.png);
+	background-size: 170px;
 }
 
 #form {
@@ -88,9 +89,11 @@ body{
 }
 
 #messages > li:nth-child(odd) {
-	background: #efefef;
+	background: #e3e3e3;
 }
-
+#endRoundScores > li:nth-child(odd) {
+	background: #e3e3e3;
+}
 .flexBox {
 	display: flex;
 	width: 100vw;
@@ -98,20 +101,26 @@ body{
 }
 
 #players {
-	text-align: center;
-	border: 5px solid red;
-	width: 15%;
+	list-style-type: none;
 	margin: 0px;
 	padding: 0px;
-	list-style-type: none;
-	border-width: 5px 0px 5px 5px;
+	padding-inline-start: 0px;
+}
+#playersContainer{
+	margin-left:3%;
+	text-align: center;
+	/* border: 5px solid red; */
+	width: 15%;
+	
+	
+	
 	/*max-width: 130px;*/
 	background-color: white;
-	margin-left:3%;
+	
 	height: fit-content;
   min-height: 60%;
+	position: relative;
 }
-
 .username {
 	position: relative;
 	padding-top: 5px;
@@ -132,10 +141,10 @@ body{
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+
 .userscore{
 	padding-right: 1em;
   padding-bottom: 5px;
-	border-bottom: 5px solid red;
 	text-align: right;
 }
 .playerLocater {
@@ -144,16 +153,19 @@ body{
 	left: -22px;
 	width:45px;
 }
-
+#players > li:nth-child(odd) {
+  background: #e3e3e3;
+}
 .crown {
 	position: absolute;
 	/* float: left; */
 	left: 0px;
 	width:45px;
+	top:5px;
 }
 #controls {
 	position: relative;
-	border: 5px solid red;
+	/* border: 5px solid red; */
 	width: 55%;
 	height: 100%;
 	background-color: white;
@@ -164,15 +176,16 @@ body{
 	text-align: center;
 }
 #wordToGuess {
+	padding: 5px;
 	text-align: center;
 }
 #chatContainer {
-	border: 5px solid red;
+	/* border: 5px solid red; */
 	width: calc(30% - 20px);
 	height: 95%;
 	position: relative;
 	background-color: white;
-	border-left-width: 0px;
+	
 	margin-right:3%;
 	word-wrap: break-word;
 }
@@ -200,11 +213,12 @@ body {
 }
 #GuiTime {
 	position: absolute;
-	top: 0px;
+	top: 5px;
+	left: 5px;
 }
 #GuiRounds {
-	right: 0;
-	top:0;
+	right: 5px;
+	top:5px;
   position: absolute;
 }
 #roundOver {
@@ -228,7 +242,7 @@ body {
 }
 #endRoundScores {
 	text-align: center;
-	border: 5px solid red;
+	/* border: 5px solid red; */
 	
 	border-bottom-width: 0;
 	margin: 0px;
@@ -267,25 +281,20 @@ body {
 	max-width: 800px;
 	text-align: center;
 	background-color: #4CAF50;
-	border-radius: 20px;
 	padding: 10px;
-	margin-top: 20px;
 	/*opacity: .9;*/
+	position: absolute;
+	bottom: 0px;
 }
 #about {
-	font-family:'agent-orange.regular';
-	font-size: 30px;
 	margin:auto;
 	text-align: center;
-	background-color: #4CAF50;
 	/*opacity: .9;*/
-	max-width: 600px;
-	border-radius: 20px;
-	margin-top: 5px;
-	margin-bottom: 5px;
+	max-width: 400px;
 	text-decoration: none;
-  color: black;
+	display: block;
 }
+
 #roundsLabel {
 	font-family:'agent-orange.regular';
 	font-size: 18px;
@@ -304,6 +313,13 @@ body {
 .winner{
 	color: green;
 }
+.extraSpaces {
+  width: 5%;
+}
+#shareUrl {
+	display: none;
+}
+
 
 .custom-radios {
 	display: flex;
@@ -496,15 +512,16 @@ input:checked + .slider:before {
 		font-size: 4vw;
 	}
 	#chatContainer {
-    border: 2px solid red;
+    /* border: 2px solid red; */
 		border-left-width: 0px;
 	}
 	#controls {
-		border: 2px solid red;
+		/* border: 2px solid red; */
 	}
-	#players {
-		border: 2px solid red;
+	#playersContainer {
+		/* border: 2px solid red; */
 		border-right-width: 0px;
+		position: relative;
 	}
 	#endBox{
 		width: 80%;
@@ -517,5 +534,8 @@ input:checked + .slider:before {
 	}
 	#Gui{
 		display: none;
+	}
+	.extraSpaces {
+		width: 0;
 	}
 }

@@ -17,15 +17,16 @@
   </head>
   <body>
 		<a style="text-decoration: none;" href="../../">
-			<div id="about">
-				
-				Buildonary.live
-			</div>
+			<img id="about" src="../../logo.png" alt="Buildonary.Live">
 		</a>
 		<div class="flexBox">
-			<ul id="players">
-				
-			</ul>
+			<div id="playersContainer">
+				<ul id="players">
+					
+				</ul>
+				<div id="roomInfo"></div>
+			</div>
+			<div class="extraSpaces"></div>
 			<div id="controls">
 				<div id="roundOver">
 					<div id="endBox">
@@ -215,6 +216,7 @@
 				</div>
 				
 			</div>	
+			<div class="extraSpaces"></div>
 			<div id="chatContainer">
 				<div id="messagesContainer">
 					<ul id="messages"></ul>
@@ -225,9 +227,7 @@
 			</div>
 			
 		</div>
-		<div id="roomInfo">
 		
-		</div>
 		
 
 		<script src="/socket.io/socket.io.js"></script>
