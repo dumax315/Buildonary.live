@@ -18,7 +18,7 @@ var playersEnd = document.getElementById("endRoundScores");
 var startGameButton = document.getElementById("newGame");
 //entering the room
 var pathname = window.location.pathname;
-roomInfo.innerHTML += "your room code is: " + pathname.split("/")[2];
+roomInfo.innerHTML += "Code: " + pathname.split("/")[2];
 
 let currentBuilder = false;
 let timeLeft;
@@ -267,8 +267,14 @@ document.getElementById("checkBoxDelete").addEventListener('change', function() 
     isShiftDown = false;
   }
 });
-
-
+document.getElementById("showControls").addEventListener('click', function() {
+	let info = document.getElementById("info");
+  if (info.style.display == "none") {
+    info.style.display = "block";
+  } else {
+    info.style.display = "none";
+  }
+});
 
 document.getElementById("copyLinkButton").addEventListener("click", function() {
     copyToClipboard(document.getElementById("shareUrl"));
@@ -426,7 +432,7 @@ function init() {
 
 	renderer = new THREE.WebGLRenderer( { antialias: true, preserveDrawingBuffer: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( window.innerWidth * factor, window.innerHeight * factor );
+	renderer.setSize( window.innerWidth * factor, window.innerHeight * factor);
 	var renderDiv = document.getElementById("canvasContainer");
 	renderDiv.appendChild( renderer.domElement );
 

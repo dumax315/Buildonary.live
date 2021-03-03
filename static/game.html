@@ -16,15 +16,23 @@
 		</script>
   </head>
   <body>
+    <div class="blockMainHeader"></div>
 		<a style="text-decoration: none;" href="../../">
 			<img id="about" src="../../logo.png" alt="Buildonary.Live">
 		</a>
 		<div class="flexBox">
 			<div id="playersContainer">
+        <div class="blockHeader">
+          Players
+        </div>
 				<ul id="players">
-					
 				</ul>
-				<div id="roomInfo"></div>
+        <div class="blockFooter">
+          <div id="roomInfo"></div>
+					<button id="showControls" class="defultButton">Controls</button><a id="link"></a>
+					<button id="saveBuild" class="defultButton">Save Build As PNG</button>
+        </div>
+				
 			</div>
 			<div class="extraSpaces"></div>
 			<div id="controls">
@@ -41,7 +49,15 @@
 				</div>
 				<div id="GuiRounds">
 				</div>
+				
 				<div id="Gui">
+					
+				</div>
+				<div id="info" style="display: none;">
+					
+					<strong>left click</strong>: add voxel, <strong>shift + left click</strong>: remove voxel<br>
+					<strong>Right click</strong>: Orbit the Camera, <strong>shift + right click</strong>: Pan the Camera<br>
+					<strong>Scroll Wheel</strong>: Zoom In/Out
 					
 				</div>
 				<div id="delSw">Deleting:</div>
@@ -54,7 +70,8 @@
 				<!-- canvas will go here -->
 				<div id="canvasContainer">
 				</div>
-				<div class="custom-radios">
+        <div class="blockFooter">
+          <div class="custom-radios">
 					<div>
 						<input type="radio" id="color-1" name="color" value="color-1" checked>
 						<label for="color-1">
@@ -98,7 +115,7 @@
 							</span>
 						</label>
 					</div>
-					<!-- code to coby to add colors-->
+					<!-- code to copy to add colors-->
 					<div>
 						<input type="radio" id="color-6" name="color" value="color-6">
 						<label for="color-6">
@@ -197,32 +214,33 @@
 							</span>
 						</label>
 					</div>
-				</div>
-				<div id="adminControls">
-					<label for="rounds" id="roundsLabel" >Rounds:</label>
-					<input type="number" id="rounds" name="rounds" min="1" max="5" value="1">
-					<label for="time" id="timeLabel" >Time to Build (s):</label>
-					<input type="number" id="time" name="time" min="50" max="300" value="120">
-					<button id="newGame">Start Game</button>
-				</div>
-				<button id="saveBuild">Save Build As png</button><a id="link"></a>
-				
-				<div id="info">
+				  </div>
+					<br>
+          <div id="adminControls">
+						<label for="rounds" id="roundsLabel" >Rounds:</label>
+						<input type="number" id="rounds" name="rounds" min="1" max="5" value="1">
+						<label for="time" id="timeLabel" >Time to Build (s):</label>
+						<input type="number" id="time" name="time" min="50" max="300" value="120">
+						<button id="newGame" class="defultButton">Start Game</button>
+						<br>
+					</div>
 					
-					<strong>left click</strong>: add voxel, <strong>shift + left click</strong>: remove voxel<br>
-					<strong>Right click</strong>: Orbit the Camera, <strong>shift + right click</strong>: Pan the Camera<br>
-					<strong>Scroll Wheel</strong>: Zoom In/Out
 					
-				</div>
+					
+
+        </div>
 				
 			</div>	
 			<div class="extraSpaces"></div>
 			<div id="chatContainer">
+        <div class="blockHeader">
+          Chat
+        </div>
 				<div id="messagesContainer">
 					<ul id="messages"></ul>
 				</div>
 				<form id="form" action="">
-					<input id="input" autocomplete="off" /><button>Send</button>
+					<input id="input" autocomplete="off" placeholder="Guess.." /><button>Send</button>
 				</form>
 			</div>
 			
