@@ -189,38 +189,38 @@ io.on('connection', (socket) => {
 	//Message
 	socket.on('chat message', (msg) => {
 		try {
-		var locat = findObjectByKey(roomData, "code", myroom);
-		var playerInfoLocation = roomData[locat]["playerIds"].indexOf(socket.id);
-		try {
-			if(msg.toLowerCase() == roomData[locat]["word"].toLowerCase()){
-			var now = new Date().getTime();
-			// Find the distance between now and the count down date
-			var distance = Math.floor((roomData[locat]["time"] - now)/100);
-			
-			if(!roomData[locat]["playerSolved"][playerInfoLocation]){
-				roomData[locat]["playerScores"][playerInfoLocation] += distance;
-				roomData[locat]["playerSolved"][playerInfoLocation] = true;
-				roomData[locat]["drawerScore"] += distance;
-				io.to(myroom).emit('update Users', roomData[locat]);
+			var locat = findObjectByKey(roomData, "code", myroom);
+			var playerInfoLocation = roomData[locat]["playerIds"].indexOf(socket.id);
+			try {
+				if(msg.toLowerCase() == roomData[locat]["word"].toLowerCase()){
+				var now = new Date().getTime();
+				// Find the distance between now and the count down date
+				var distance = Math.floor((roomData[locat]["time"] - now)/100);
+				
+				if(!roomData[locat]["playerSolved"][playerInfoLocation]){
+					roomData[locat]["playerScores"][playerInfoLocation] += distance;
+					roomData[locat]["playerSolved"][playerInfoLocation] = true;
+					roomData[locat]["drawerScore"] += distance;
+					io.to(myroom).emit('update Users', roomData[locat]);
 
-				io.to(myroom).emit('chat message win', "Guessed the Answer!", roomData[locat]["playerNames"][playerInfoLocation]);
+					io.to(myroom).emit('chat message win', "Guessed the Answer!", roomData[locat]["playerNames"][playerInfoLocation]);
 
-				if(roomData[locat]["playerSolved"].indexOf(false)==-1){
-					clearTimeout(roomIntervals[locat]["timeOut"]);
-					endRound(myroom,locat,socket.id);
+					if(roomData[locat]["playerSolved"].indexOf(false)==-1){
+						clearTimeout(roomIntervals[locat]["timeOut"]);
+						endRound(myroom,locat,socket.id);
+					}
 				}
-			}
-			
-			}else{
+				
+				}else{
 
-				io.to(myroom).emit('chat message', msg.substring(0, 100), roomData[locat]["playerNames"][playerInfoLocation]);
+					io.to(myroom).emit('chat message', msg.substring(0, 100), roomData[locat]["playerNames"][playerInfoLocation]);
+				}
+				
 			}
-			
-		}
-		catch(err) {
-			io.to(myroom).emit('chat message', msg.substring(0, 100), roomData[locat]["playerNames"][playerInfoLocation]);
-			console.log(err);
-		}
+			catch(err) {
+				io.to(myroom).emit('chat message', msg.substring(0, 100), roomData[locat]["playerNames"][playerInfoLocation]);
+				console.log(err);
+			}
 		}catch(err) {
 			console.log(err);
 		}

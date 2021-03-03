@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-		<meta name="description" content="Buildonary.Live, 3D pictonary on the WEB">
-		<meta name="keywords" content="Buildonary, Buildonary.live, pictonary, Io, 3Dgames">
+		<meta name="description" content="Buildonary.Live, 3D Voxel Pictionary for the Web">
+		<meta name="keywords" content="Buildonary, Buildonary.live, pictonary, Io, 3Dgames, Skribbl.io">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buildonary.Live</title>
     <link href="homestyle.css" rel="stylesheet" type="text/css" />
@@ -20,28 +20,31 @@
 		<script data-ad-client="ca-pub-2742836903568102" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <body>
-		<div id="about">
-			
-			<div>Welcome to<br>Buildonary.live</div>
-		</div>
+		<div class="blockMainHeader"></div>
+		<a style="text-decoration: none;" href="">
+			<img id="about" src="logo.png" alt="Buildonary.Live">
+		</a>
 		<div id="formContainer">
 			<form id="info">
-				<label for="uname">Username:</label>
-				<input type="text" id="uname" name="uname"><br>
+        <div class="blockHeader">
+          <label for="uname">Username:</label>
+				  <input type="text" id="uname" name="uname"><br>
+        </div>
 				<button onclick="joinPublic()">Join the Public Room</button><br>
 				<button onclick="newRoom()">Create a new private room</button><br>
 				<button onclick="joinRoom()">Join existing private room</button><br>
-			
-				<label for="rcode">Room Code:</label>
+        <div class="blockFooter">
+          <label for="rcode">Room Code:</label>
 				<input type="text" id="rcode" name="rcode">
+        </div>
 			</form>
 		</div>
 		<div class="aboutTheGame">
-			<h2>Join the Discord server to find other players! <a href = "https://discord.gg/ZcjxMS2Cu3">https://discord.gg/ZcjxMS2Cu3</a></h2>
+			<h2>Join the Discord server <a href = "https://discord.gg/ZcjxMS2Cu3">https://discord.gg/ZcjxMS2Cu3</a></h2>
 		</div>
 		<div class="aboutTheGame">
 			Created by Theo<br>
-			Send suggestions and compliments to <a href = "mailto: Theomhalpern@gmail.com">Theomhalpern@gmail.com</a><br>
+			Send suggestions (and compliments) to <a href = "mailto: Theomhalpern@gmail.com">Theomhalpern@gmail.com</a><br>
 			Copyright (c) 2021 Theo
 		</div>
 		<div id="small">Voxel painter built off of <a href="https://threejs.org/examples/#webgl_interactive_voxelpainter" title="three js examples">three.js interactive voxelpainter<br></a>some icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
