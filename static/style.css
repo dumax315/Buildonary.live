@@ -7,6 +7,7 @@
   --themeGray1: #8d929e;
   --themeGray2: #e3e3e3;
   --themeGray4: #f0f0f0;
+  --themeRed: #FF5E5E;
 }
 
 body {
@@ -54,7 +55,7 @@ body{
 	position: absolute;
 	/* background: rgba(0, 0, 0, 0.15); */
   background: var(--themeGray0);
-	padding: 0.25rem;
+	padding: 0.35rem;
 	/* bottom: 0; */
 	left: 0;
 	right: 0;
@@ -73,6 +74,10 @@ body{
 	/* border-radius: 2rem; */
 	margin: 0.25rem;
 	width:80%;
+}
+
+#adminControls:input {
+  font-family: 'LCD Solid';
 }
 
 #input:focus {
@@ -171,11 +176,19 @@ body{
   padding-bottom: 5px;
 	text-align: right;
 }
+
+.number-input {
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+}
+
 .playerLocater {
 	position: absolute;
 	/* float: left; */
 	left: -22px;
-	width: 45px;
+  top: 2px;
+	width: 40px;
 }
 #players > li:nth-child(odd) {
   background: var(--themeGray2);
@@ -190,25 +203,29 @@ body{
 #controls {
 	position: relative;
 	/* border: 5px solid red; */
-	width: 55%;
 	height: 100%;
 	/* background-color: var(--themeGray0); */
 }
 
 #info {
 	position: absolute;
-	text-align: center;
-	margin-right: 1em;
-	
-	width: 100%;
-	top: 50%;
-	margin: auto;
-	background-color: var(--themeGray0);
-	opacity: .9;
+  top: 40%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+	opacity: .85;
+  color: white;
+  background-color: var(--themeGray0);
+  padding: 20px;
+  line-height: 200%;
+  text-align: center;
+}
+
+.yellow {
+  color: var(--themeYellow);
 }
 
 #copyLinkButton {
-	background: none!important;
+	background: none;
 	border: none;
 	padding: 10px!important;
 	/* font-family: arial, sans-serif; */
@@ -217,17 +234,60 @@ body{
 	cursor: pointer;
 	font-family: 'LCD Solid';
 	font-size: 16px;
+	-webkit-transition-duration: 0.3s; /* Safari */
+  transition-duration: 0.3s;
+}
+
+#copyLinkButton:hover {
+  color: var(--themeGreen);
+}
+
+#copyLinkButton:active {
+  outline: 0;
+  border: none;
+  -moz-outline-style: none;
+  color: white;
+}
+
+#copyLinkButton:focus {
+  outline: 0;
+  border: none;
+  -moz-outline-style: none;
+}
+
+/* save link after click button */
+/* #copyLinkButton:after {
+}
+
+#copyLinkButton:active:after {
+  transition: 0s;
+} */
+
+canvas {
 }
 
 .defultButton{
 	background: var(--themeYellow);
 	border: none;
-	padding: 5px;
+	padding: 10px 10px 10px 10px;
 	/* margin: 0.25rem; */
 	/* border-radius: 3px; */
 	outline: none;
 	color: var(--themeGray0);
 	font-family: 'LCD Solid';
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: var(--themeGreen);
+  color: white;
+}
+
+.defultButton:disabled:hover {
+  cursor: not-allowed;
+  background: var(--themeYellow);
+	color: var(--themeGray0);
 }
 
 /* general block styles  */
@@ -241,7 +301,7 @@ body{
 }
 
 .blockHeader {
-  padding: 5px;
+  padding: 10px;
 	text-align: center;
   background-color: var(--themeGray0);
   color: white;
@@ -250,13 +310,13 @@ body{
 .blockFooter {
   background-color: var(--themeGray0);
   color: white;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 
 
 #wordToGuess {
-	padding: 5px;
+	padding: 10px;
 	text-align: center;
   background-color: var(--themeGray0);
   color: var(--themeYellow);
@@ -272,6 +332,8 @@ body{
 	word-wrap: break-word;
 }
 #adminControls {
+  padding: 20px;
+  text-align: center;
 	display: none;
 }
 #messagesContainer {
@@ -295,14 +357,14 @@ body {
 }
 #GuiTime {
 	position: absolute;
-  color: var(--themeYellow);
-	top: 5px;
-	left: 5px;
+  color: white;
+	top: 10px;
+	left: 10px;
 }
 #GuiRounds {
-	right: 5px;
-  color: var(--themeYellow);
-	top:5px;
+	right: 10px;
+  color: white;
+	top:10px;
   position: absolute;
 }
 #roundOver {
@@ -352,8 +414,8 @@ body {
 }
 #nextRound{
 		width: 100%;
-
 }
+
 #nextRound, .buttonStyle {
   transition-duration: 0.4s;
 }
@@ -362,10 +424,14 @@ body {
   background-color: var(--themeYellow);
   color: white;
 }
-#roomInfo{
-	/* margin: auto; */
+
+#newGame {
+  margin-top: 10px;
+}
+
+.playersFooter {
+/* margin: auto; */
 	text-align: center;
-	background-color: var(--themeGray0);
 	/* padding: 10px; */
 	/*opacity: .9;*/
 	position: absolute;
@@ -373,6 +439,11 @@ body {
 	width: 100%;
 	transform: translateY(100%);
 }
+
+#roomInfo{
+	background-color: var(--themeGray0);
+}
+
 #about {
   position: relative;  
   z-index: 20;
@@ -384,6 +455,11 @@ body {
 	max-width: 400px;
 	text-decoration: none;
 	display: block;
+  transition: all 0.3s ease;
+}
+
+#about:hover {
+  transform: scale(1.1);
 }
 
 #roundsLabel {
@@ -397,20 +473,13 @@ body {
 	touch-action: none;
 }
 #saveBuild{
-	position: absolute;
-	bottom: 0;
-	left: 0px;
-	z-index: 800;
-	transform: translateY(150px);
+  margin-top: 10px;
 	width: 100%;
 }
+
 #showControls{
-	position: absolute;
-	bottom: 0;
-	z-index: 800;
-	left: 0px;
+  margin-top: 10px;
 	width: 100%;
-	transform: translateY(90px);
 }
 
 .winner{
@@ -423,13 +492,13 @@ body {
 	display: none;
 }
 
-
 .custom-radios {
 	display: flex;
 	width: 100%;
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
+  padding-top: 15px;
 }
 .custom-radios div {
   display: inline-block;
@@ -517,9 +586,10 @@ body {
 
 
 #roomInfo{
-	padding: 0px;
+	padding: 10px 0px 0px 0px;
 	overflow: hidden;
 }
+
 #delSw{
 	position: absolute;
 	right:65px;
@@ -593,7 +663,7 @@ input:checked + .slider:before {
 	}
 
 	#roomInfo{
-		padding: 0px;
+	  padding: 10px 0px 0px 0px;
 		overflow: hidden;
 	}
 	#form > button{
@@ -613,6 +683,11 @@ input:checked + .slider:before {
 	#form{
 		padding: 0px;
 	}
+
+  .blockHeader {
+    font-size: 8pt;
+  }
+
 	.username{
 		font-size: 3vw;
 	}

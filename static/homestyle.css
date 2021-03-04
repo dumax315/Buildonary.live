@@ -31,8 +31,8 @@ body{
 	text-align: center;
 	/* background-color: white; */
 	background-color: rgb(41, 41, 41);
-	background-image: url(images/patternBackgroundWhite.png);
-	background-size: 200px;
+	background-image: url(images/newBackground.webp);
+	background-size: 350px;
 	margin: 0px;
 	
 }
@@ -153,6 +153,15 @@ path {
   position: relative;
   margin: -20px;
   margin-top: 40px;
+}
+
+.blockBody {
+  position: relative;
+  background-color: var(--themeGray0);
+  color: white;
+  padding: 2px;
+  margin: -20px;
+  margin-bottom: 40px;
 }
 
 label {
