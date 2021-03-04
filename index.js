@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+
 let connectCounter =0;
 let openRooms = [];
 let roomData = [];
@@ -158,7 +159,7 @@ io.on('connection', (socket) => {
 			var locat = findObjectByKey(roomData, "code", myroom);
 			locatPlace = roomData[locat].playerIds.indexOf(socket.id);
 			console.log(locatPlace)
-			if(locatPlace == roomData[locat]["currentPlayer"]){
+			if(roomData[locat]["playerIds"][locatPlace] == roomData[locat]["currentPlayer"]){
 				clearTimeout(roomIntervals[locat]["timeOut"]);
 				startRound(myroom,mySocketId);
 			};
@@ -167,7 +168,12 @@ io.on('connection', (socket) => {
 			roomData[locat].playerScores.splice(locatPlace,1);
 			roomData[locat].playerSolved.splice(locatPlace,1);
 			io.to(myroom).emit('update Users', roomData[locat]);
-			
+			if(roomData[locat].playerIds.length == 0){
+				roomData.splice(locat,1);
+				openRooms.splice(locat,1);
+				console.log(roomData);
+
+			}
 		}
 		catch(err) {
 			console.log(err);
@@ -186,6 +192,7 @@ io.on('connection', (socket) => {
 		}
 		console.log(roomData);
   });
+
 	//Message
 	socket.on('chat message', (msg) => {
 		try {

@@ -286,7 +286,7 @@ button:hover {
 
 .defultButton:disabled:hover {
   cursor: not-allowed;
-  background: var(--themeYellow);
+  background: var(--themeGray2);
 	color: var(--themeGray0);
 }
 
@@ -491,6 +491,15 @@ body {
 }
 #shareUrl {
 	display: none;
+}
+button:disabled,
+button[disabled]{
+  background-color: #cccccc;
+}
+
+button:disabled:hover,
+button[disabled][hover]{
+  background-color: #cccccc;
 }
 
 .custom-radios {

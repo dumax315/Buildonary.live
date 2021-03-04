@@ -5,7 +5,7 @@ import Stats from '../../building/stats.module.js';
 import { GUI } from '../../building/dat.gui.module.js';
 import { OrbitControls } from '../../building/OrbitControls.js';
 //import { OutlineEffect } from '../../building/OutlineEffect.js';
-
+let timeSenseAction;
 var socket = io();
 
 var messages = document.getElementById('messages');
@@ -21,7 +21,11 @@ var pathname = window.location.pathname;
 roomInfo.innerHTML += "Code: " + pathname.split("/")[2];
 
 let currentBuilder = false;
-let timeLeft;
+
+const timeoutInnactive = 240000;
+
+let timeLeft = setTimeout(inactive, timeoutInnactive);
+
 var a = document.createElement('a');
 var linkText = document.createTextNode("https://"+window.location.hostname+pathname);
 a.appendChild(linkText);
@@ -41,6 +45,13 @@ roomInfo.appendChild(b);
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('username');
 socket.emit('set Username', myParam);
+
+function inactive(){
+	console.log("inactive");
+	
+	socket.disconnect();
+	window.location = "../../inactive.html";
+}
 
 socket.emit('enter room', pathname.split("/")[2]);
 window.history.replaceState({}, document.title,pathname);
@@ -249,6 +260,7 @@ document.getElementById("newGame").addEventListener("click", startRound);
 document.getElementById("nextRound").addEventListener("click", startRound);
 
 function startRound(evt) {
+	
 	var test = document.getElementById("rounds").value;
 	var time = document.getElementById("time").value;
 	
@@ -525,7 +537,8 @@ function init() {
 
 
 function onWindowResize() {
-
+	clearTimeout(timeLeft);
+	timeLeft = setTimeout(inactive, timeoutInnactive);
 	var w = window.innerWidth * factor;
 	var h = window.innerHeight * factor;
 	renderer.setSize(w, h);
@@ -584,6 +597,8 @@ function findObjectByKey(array, key, value) {
 	return null;
 }
 function onMouseDown( event ) {
+	clearTimeout(timeLeft);
+	timeLeft = setTimeout(inactive, timeoutInnactive);
 	if(event.button == 0){
 		//event.preventDefault();
 		isMouseDown = true;
@@ -600,7 +615,8 @@ function onMouseDown( event ) {
 }
 
 function onTouchStart( event ) {
-
+	clearTimeout(timeLeft);
+	timeLeft = setTimeout(inactive, timeoutInnactive);
 	event.preventDefault(); // prevent scrolling
 	if(event.touches.length == 1) {
 		isMouseDown = true;
@@ -681,6 +697,8 @@ function placeOrDelete(firstTime = false) {
 
 
 function onMouseUp( event ) {
+	clearTimeout(timeLeft);
+	timeLeft = setTimeout(inactive, timeoutInnactive);
 	if(event.button == 0){
 		isMouseDown = false;
 		clearInterval(mouseRepte);
@@ -689,6 +707,8 @@ function onMouseUp( event ) {
 }
 
 function onDocumentMouseMove( event ) {
+	clearTimeout(timeLeft);
+	timeLeft = setTimeout(inactive, timeoutInnactive);
 	event.preventDefault();
 	
 	mouse.set( ( (event.clientX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.clientY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
@@ -767,6 +787,8 @@ function onDocumentKeyDown( event ) {
 }
 
 function onDocumentKeyUp( event ) {
+	clearTimeout(timeLeft);
+	timeLeft = setTimeout(inactive, timeoutInnactive);
 	switch ( event.keyCode ) {
 
 		case 16: isShiftDown = false; break;
