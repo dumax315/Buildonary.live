@@ -28,15 +28,11 @@
 				<ul id="players">
 				</ul>
         <div class="blockFooter">
-          <div class="playersFooter">
-            <div id="roomInfo"></div>
-
-            <button id="showControls" class="defultButton">Controls</button><a id="link"></a>
-            <button id="saveBuild" class="defultButton">Save Build As PNG</button>
-          </div>
-          
-            
+          <div id="roomInfo"></div>
+					<button id="showControls" class="defultButton">Controls</button><a id="link"></a>
+					<button id="saveBuild" class="defultButton">Save Build As PNG</button>
         </div>
+				
 			</div>
 			<div class="extraSpaces"></div>
 			<div id="controls">
@@ -59,11 +55,9 @@
 				</div>
 				<div id="info" style="display: none;">
 					
-					<strong><span class="yellow">Left Click</span></strong>: Add Voxel
-          <br><strong><span class="yellow">Shift + Left Click</span></strong>: Remove Voxel
-					<br><strong><span class="yellow">Right Click</span></strong>: Orbit the Camera 
-          <br><strong><span class="yellow">Shift + Right Click</span></strong>: Pan the Camera
-					<br><strong><span class="yellow">Scroll Wheel</span></strong>: Zoom In/Out
+					<strong>left click</strong>: add voxel, <strong>shift + left click</strong>: remove voxel<br>
+					<strong>Right click</strong>: Orbit the Camera, <strong>shift + right click</strong>: Pan the Camera<br>
+					<strong>Scroll Wheel</strong>: Zoom In/Out
 					
 				</div>
 				<div id="delSw">Deleting:</div>
@@ -224,10 +218,10 @@
 					<br>
           <div id="adminControls">
 						<label for="rounds" id="roundsLabel" >Rounds:</label>
-						<input type="number" id="rounds" name="rounds" class="number-input" min="1" max="5" value="1">
+						<input type="number" id="rounds" name="rounds" min="1" max="5" value="1">
 						<label for="time" id="timeLabel" >Time to Build (s):</label>
-						<input type="number" id="time" name="time" class="number-input" min="50" max="300" value="120">
-						<br><button id="newGame" class="defultButton">Start Game</button>
+						<input type="number" id="time" name="time" min="50" max="300" value="120">
+						<button id="newGame" class="defultButton">Start Game</button>
 						<br>
 					</div>
 					

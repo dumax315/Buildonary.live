@@ -344,7 +344,6 @@ function changeColor(evt){
 	
 	console.log(newColor);
 	colorValueLarge = newColor;
-	
 }
 
 function gameTimer() {
@@ -635,7 +634,7 @@ function placeOrDelete(firstTime = false) {
 			// delete cube
 
 			if ( isShiftDown ) {
-				placespeed = 70;
+				placespeed = 100;
 				if ( intersect.object !== plane ) {
 
 					scene.remove( intersect.object );
@@ -652,7 +651,7 @@ function placeOrDelete(firstTime = false) {
 				// create cube
 
 			} else {
-				placespeed = 100;
+				placespeed = 130;
 				cubeGeo = new THREE.BoxGeometry( 62.5*boxDem[0], 62.5, 62.5*boxDem[1] );
 				const voxel = new THREE.Mesh( cubeGeo, new THREE.MeshLambertMaterial( { color: colorValueLarge } ) );
 				
