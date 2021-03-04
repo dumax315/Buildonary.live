@@ -647,7 +647,12 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-
+div#controls {
+	width: 55%;
+}
+#adminControls{
+		padding: 5px;
+	}
 @media screen and (max-width: 600px) {
 	body{
 		background-size: 100px;
@@ -698,9 +703,7 @@ input:checked + .slider:before {
     /* border: 2px solid red; */
 		border-left-width: 0px;
 	}
-	#controls {
-		/* border: 2px solid red; */
-	}
+	
 	#playersContainer {
 		/* border: 2px solid red; */
 		border-right-width: 0px;
@@ -724,4 +727,5 @@ input:checked + .slider:before {
 	.defultButton{
 		font-size: 2vw;
 	}
+	
 }
