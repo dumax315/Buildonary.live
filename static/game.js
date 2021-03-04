@@ -22,7 +22,7 @@ roomInfo.innerHTML += "Code: " + pathname.split("/")[2];
 
 let currentBuilder = false;
 
-const timeoutInnactive = 240000;
+const timeoutInnactive = 600000;
 
 let timeLeft = setTimeout(inactive, timeoutInnactive);
 
@@ -539,6 +539,7 @@ function init() {
 function onWindowResize() {
 	clearTimeout(timeLeft);
 	timeLeft = setTimeout(inactive, timeoutInnactive);
+	console.log(timeLeft);
 	var w = window.innerWidth * factor;
 	var h = window.innerHeight * factor;
 	renderer.setSize(w, h);
