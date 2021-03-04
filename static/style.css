@@ -320,6 +320,7 @@ button:hover {
 	text-align: center;
   background-color: var(--themeGray0);
   color: var(--themeYellow);
+	min-height: 1em;
 }
 #chatContainer {
 	/* border: 5px solid red; */
