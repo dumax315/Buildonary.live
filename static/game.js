@@ -24,8 +24,8 @@ let currentBuilder = false;
 
 const timeoutInnactive = 600000;
 
-let timeLeft = setTimeout(inactive, timeoutInnactive);
-
+let leftUntilTimeout = setTimeout(inactive, timeoutInnactive);
+let timeLeft;
 var a = document.createElement('a');
 var linkText = document.createTextNode("https://"+window.location.hostname+pathname);
 a.appendChild(linkText);
@@ -537,9 +537,6 @@ function init() {
 
 
 function onWindowResize() {
-	clearTimeout(timeLeft);
-	timeLeft = setTimeout(inactive, timeoutInnactive);
-	console.log(timeLeft);
 	var w = window.innerWidth * factor;
 	var h = window.innerHeight * factor;
 	renderer.setSize(w, h);
@@ -598,8 +595,8 @@ function findObjectByKey(array, key, value) {
 	return null;
 }
 function onMouseDown( event ) {
-	clearTimeout(timeLeft);
-	timeLeft = setTimeout(inactive, timeoutInnactive);
+	clearTimeout(leftUntilTimeout);
+	leftUntilTimeout = setTimeout(inactive, timeoutInnactive);
 	if(event.button == 0){
 		//event.preventDefault();
 		isMouseDown = true;
@@ -616,8 +613,8 @@ function onMouseDown( event ) {
 }
 
 function onTouchStart( event ) {
-	clearTimeout(timeLeft);
-	timeLeft = setTimeout(inactive, timeoutInnactive);
+	clearTimeout(leftUntilTimeout);
+	leftUntilTimeout = setTimeout(inactive, timeoutInnactive);
 	event.preventDefault(); // prevent scrolling
 	if(event.touches.length == 1) {
 		isMouseDown = true;
@@ -698,8 +695,6 @@ function placeOrDelete(firstTime = false) {
 
 
 function onMouseUp( event ) {
-	clearTimeout(timeLeft);
-	timeLeft = setTimeout(inactive, timeoutInnactive);
 	if(event.button == 0){
 		isMouseDown = false;
 		clearInterval(mouseRepte);
@@ -708,8 +703,8 @@ function onMouseUp( event ) {
 }
 
 function onDocumentMouseMove( event ) {
-	clearTimeout(timeLeft);
-	timeLeft = setTimeout(inactive, timeoutInnactive);
+	clearTimeout(leftUntilTimeout);
+	leftUntilTimeout = setTimeout(inactive, timeoutInnactive);
 	event.preventDefault();
 	
 	mouse.set( ( (event.clientX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.clientY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
@@ -778,7 +773,8 @@ function rebuild(arrayOfVoxels){
 }
 
 function onDocumentKeyDown( event ) {
-
+	clearTimeout(leftUntilTimeout);
+	leftUntilTimeout = setTimeout(inactive, timeoutInnactive);
 	switch ( event.keyCode ) {
 
 		case 16: isShiftDown = true; break;
@@ -788,8 +784,7 @@ function onDocumentKeyDown( event ) {
 }
 
 function onDocumentKeyUp( event ) {
-	clearTimeout(timeLeft);
-	timeLeft = setTimeout(inactive, timeoutInnactive);
+
 	switch ( event.keyCode ) {
 
 		case 16: isShiftDown = false; break;
