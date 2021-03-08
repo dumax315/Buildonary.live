@@ -55,7 +55,7 @@ input[type=text], select {
 button{
 	width: 100%;
   background-color: var(--themeYellow);
-  color: var(--themeGray0);
+  color: themeGray0;
   padding: 14px 20px;
   margin: 8px 0;
   /* border-radius: 4px; */
@@ -106,6 +106,41 @@ path {
 #about:hover {
   transform: scale(1.1);
 }
+
+#bodyFlexContiner {
+	display: flex;
+	justify-content: center;
+}
+#leftContainer {
+    width: 38%;
+}
+#centerConatiner {
+    width: 40%;
+		min-width: 540px;
+		margin: auto;
+}
+#rightContiner {
+    width: 30%;
+		margin-left: 4%;
+    margin-right: 4%;
+}
+.date{
+	color:var(--themeGray0);
+}
+.newsText{
+	text-align: left;
+}
+@media screen and (max-width: 1000px) {
+	#bodyFlexContiner {
+		display: initial;
+		width: 100%;
+	}
+	#rightContiner {
+    width: inherit;
+		margin:auto;
+	}
+}
+
 @media screen and (max-width: 600px) {
   body {
     font-size: 4vw;
@@ -118,6 +153,8 @@ path {
 	button {
 		font-size:3vw;
 	}
+	
+	
 }
 #small, .aboutTheGame  {
 	overflow: hidden;
