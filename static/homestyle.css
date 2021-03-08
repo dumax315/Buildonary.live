@@ -136,9 +136,15 @@ path {
 		width: 100%;
 	}
 	#rightContiner {
-    width: inherit;
+    width: unset;
+		min-width: unset;
 		margin:auto;
 	}
+	#centerConatiner {
+    width: unset;
+		min-width: unset;
+		margin: auto;
+}
 }
 
 @media screen and (max-width: 600px) {
