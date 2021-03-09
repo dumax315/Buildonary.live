@@ -31,10 +31,11 @@ body{
 	text-align: center;
 	/* background-color: white; */
 	background-color: rgb(41, 41, 41);
-	background-image: url(images/newBackground.webp);
+	/* background-image: url(images/newBackground.webp); */
+  background-image: url(images/patternBackground.png);
 	background-size: 350px;
 	margin: 0px;
-	
+	background-attachment: fixed;
 }
 
 
@@ -173,6 +174,9 @@ path {
   background-color: var(--themeGray2);
   padding: 20px;
 	font-size: 14px;
+}
+#small{
+	margin-bottom: 1rem;
 }
 /* new stuff */
 .blockMainHeader {
