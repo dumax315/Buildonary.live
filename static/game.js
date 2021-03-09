@@ -610,6 +610,10 @@ function onMouseDown( event ) {
 		
 		//mouseRepte = setInterval(placeOrDelete, 150);			
 	}
+	let info = document.getElementById("info");
+  if (info.style.display !== "none") {
+    info.style.display = "none";
+  }
 }
 
 function onTouchStart( event ) {
