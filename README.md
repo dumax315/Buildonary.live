@@ -18,6 +18,10 @@ https://discord.gg/ZcjxMS2Cu3
 
 - trackpad mode
 
+- fix scroll bug
+
+- make boxes more moble friendly
+
 - end game screen with podium
 
 - custom word list support
