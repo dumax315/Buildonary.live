@@ -518,6 +518,8 @@ function init() {
 	//
 	canvas = document.querySelector('canvas');
 	window.addEventListener( 'resize', onWindowResize );
+	window.addEventListener('scroll', onWindowResize)
+	
 	onWindowResize();
 
 	stats = new Stats({autoPlace:false});
@@ -711,7 +713,7 @@ function onDocumentMouseMove( event ) {
 	leftUntilTimeout = setTimeout(inactive, timeoutInnactive);
 	event.preventDefault();
 	
-	mouse.set( ( (event.clientX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, - ( (event.clientY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 );
+	mouse.set( ( (event.clientX-offset["x"]) / (window.innerWidth * factor) ) * 2 - 1, (- ( (event.clientY-offset["y"]) / (window.innerHeight * factor) ) * 2 + 1 ));
 	raycaster.setFromCamera( mouse, camera );
 	const intersects = raycaster.intersectObjects( objects );
 
