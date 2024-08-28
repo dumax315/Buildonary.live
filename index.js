@@ -13,7 +13,7 @@ var words = ["Bed", "Leg", "Cup", "Egg", "Bee", "Cow", "Ant", "Ear", "Hat", "Sun
 var hardwords = ["Pillow", "balloon", "", "feather", "blanket", "monster", "ladybug", "snowman", "diamond", "chicken", "rainbow", "chimney", "Eyeball", "Pumpkin", "Giraffe", "Unicorn", "Hammock", "Blanket", "elephant", "football", "mountain", "computer", "lollipop", "backpack", "baseball", "triangle", "airplane", "popsicle", "Starfish", "Lady bug", "Notebook", "Baseball", "Umbrella", "Goldfish", "Keyboard", "hamburger", "alligator", "Fireworks", "Snowflake", "High heel", "Ice cream", "Butterfly", "Chocolate", "Candy bar", "Surfboard", "Jellyfish", "Dog", "Newspaper", "Ambulance", "Tarantula", "helicopter", "Strawberry", , "Toothpaste", "Calculator", "Sandcastle", "Polar Bear", "Sunglasses", "Watermelon", "caterpillar", "Mickey Mouse", "Eiffel Tower"];
 var fs = require('fs');
 var util = require('util');
-var log_file = fs.createWriteStream('debug.log', { flags: 'a' });
+var log_file = fs.createWriteStream('./debug.log', { flags: 'a' });
 var log_stdout = process.stdout;
 
 console.log = function(d) { //
