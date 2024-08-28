@@ -6,7 +6,7 @@ import {
 	TOUCH,
 	Vector2,
 	Vector3
-} from '../../building/build/three.module.js';
+} from '../../building/three.module.js';
 
 
 let isShiftDown = false;

@@ -1,4 +1,4 @@
-import * as THREE from '../../building/build/three.module.js';
+import * as THREE from '../../building/three.module.js';
 
 import Stats from '../../building/stats.module.js';
 

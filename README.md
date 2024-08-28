@@ -1,7 +1,7 @@
 # buildonary
 
 currently hosted at 
-https://buildonary.live
+https://buildonary.theoh.dev
 
 voxel pictionary
 
