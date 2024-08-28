@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-
+const path = require('path');
+path.__dirname
 let connectCounter = 0;
 let openRooms = [];
 let roomData = [];
@@ -10,7 +11,7 @@ let roomIntervals = [];
 var words = ["Bed", "Leg", "Cup", "Egg", "Bee", "Cow", "Ant", "Ear", "Hat", "Sun", "Pie", "Bug", "Bow", "Box", "Sea", "Eye", "Dog", "Pig", "Cat", "Owl", "Zoo", "Arm", "Bus", "Bat", "Fly", "Car", "Jar", "Ice", "Sky", "Pen", "Ball", "Bowl", "Rain", "Bird", "Worm", "Corn", "Drum", "Milk", "Shoe", "Comb", "Pool", "Moon", "Ship", "Lion", "Duck", "Hand", "Ring", "Crab", "Door", "Coin", "Book", "Desk", "Boat", "Hair", "Leaf", "Fork", "Fire", "Kite", "Bear", "Frog", "Fish", "Leg", "Tree", "Jail", "Head", "Bike", "Hook", "Star", "Eye", "Curl", "Knee", "Feet", "Love", "Nose", "Coat", "Ant", "Tail", "Face", "Line", "Flag", "King", "Cube", "Lamp", "Pen", "Kiss", "Bat", "Home", "Grass", "Heart", "Horse", "Pizza", "Clock", "Snake", "Smile", "Beach", "Snail", "Bunny", "Cloud", "Robot", "Angel", "Mouse", "Ghost", "Earth", "Mouth", "Swing", "House", "Sheep", "Music", "Ocean", "Float", "Shirt", "Whale", "Room", "Train", "Zebra", "Water", "Purse", "River", "Wheel", "Light", "Lemon", "Spoon", "Igloo", "Toast", "Night", "Truck", "Phone", "Paper", "Chair", "Pants", "Candy", "Money", "Skull", "Apple", "Plane", "Plate", "Sheet", "Table", "Watch", "Piano", "Shoe", "Island", "Banana", "Bounce", "Turtle", "Cherry", "Circle", "Flower", "Rabbit", "Grape", "Pencil", "Button", "Jacket", "Crayon", "Stairs", "Window", "Blocks", "Rocket", "Lizard", "Kitten", "Bridge", "Zigzag", "Cookie", "Monkey", "Finger", "Cheese", "Orange", "Carrot", "Bucket", "Church", "Laptop", "Bamboo", "Hammer", "Tennis", "Waffle", "Spider", "Octopus", "Ladybug", "Giraffe", "Toothbrush", "Glasses", "Mailbox", "Rainbow", "Football", "Calculator", "Hamburger", "Pancakes", "Pyramid", "Skateboard", "Suitcase", "Seaweed", "Snowman", "Cake", "Canoe", "Sandal", "Globe", "Sunflower", "Maze", "Sushi", "Limousine", "Guitar", "School",];
 
 var hardwords = ["Pillow", "balloon", "", "feather", "blanket", "monster", "ladybug", "snowman", "diamond", "chicken", "rainbow", "chimney", "Eyeball", "Pumpkin", "Giraffe", "Unicorn", "Hammock", "Blanket", "elephant", "football", "mountain", "computer", "lollipop", "backpack", "baseball", "triangle", "airplane", "popsicle", "Starfish", "Lady bug", "Notebook", "Baseball", "Umbrella", "Goldfish", "Keyboard", "hamburger", "alligator", "Fireworks", "Snowflake", "High heel", "Ice cream", "Butterfly", "Chocolate", "Candy bar", "Surfboard", "Jellyfish", "Dog", "Newspaper", "Ambulance", "Tarantula", "helicopter", "Strawberry", , "Toothpaste", "Calculator", "Sandcastle", "Polar Bear", "Sunglasses", "Watermelon", "caterpillar", "Mickey Mouse", "Eiffel Tower"];
-console.log(__dirname);
+console.log(path.__dirname);
 var fs = require('fs');
 var util = require('util');
 var log_file = fs.createWriteStream(__dirname + '/debug.log', { flags: 'a' });
