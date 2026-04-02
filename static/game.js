@@ -762,7 +762,11 @@ function onTouchEnd( event ) {
 
 function rebuild(arrayOfVoxels){
 	while(scene.children.length > 5){ 
-    scene.remove(scene.children[5]); 
+		const child = scene.children[5];
+		child.geometry.dispose();
+		child.material.dispose();
+		
+        scene.remove(child); 
 		
 	}
 	objects.splice(5,objects.length-5);
